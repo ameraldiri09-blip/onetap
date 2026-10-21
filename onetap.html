@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08080a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="OneTap">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://cdn.simpleicons.org" crossorigin>
+<link rel="preconnect" href="https://www.google.com" crossorigin>
+<title>OneTap | مثبّت التطبيقات بملف واحد</title>
+<meta name="description" content="اختر تطبيقاتك ونزّل سكربتًا واحدًا يثبّتها كلها تلقائيًا على ويندوز وماك من المصادر الرسمية.">
+<link rel="canonical" href="https://ameraldiri09-blip.github.io/samsung/onetap.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="OneTap">
+<meta property="og:title" content="OneTap | مثبّت التطبيقات بملف واحد">
+<meta property="og:description" content="اختر تطبيقاتك ونزّل سكربتًا واحدًا يثبّتها كلها تلقائيًا على ويندوز وماك من المصادر الرسمية.">
+<meta property="og:url" content="https://ameraldiri09-blip.github.io/samsung/onetap.html">
+<meta property="og:image" content="https://ameraldiri09-blip.github.io/samsung/icon-192.png">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OneTap | One-file app installer">
+<meta name="twitter:description" content="Pick your apps and get one script that installs them all automatically on Windows and macOS from official sources.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"OneTap","url":"https://ameraldiri09-blip.github.io/samsung/onetap.html","applicationCategory":"UtilitiesApplication","operatingSystem":"Windows, macOS","inLanguage":["ar","en","tr","fr","es"],"description":"Pick your apps and get one script that installs them all automatically on Windows and macOS from official sources."}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2722%27 fill=%27%230a0a0a%27/><path d=%27M27 32H73M50 32V70%27 stroke=%27%23ff7a1a%27 stroke-width=%2711%27 stroke-linecap=%27round%27 fill=%27none%27/><ellipse cx=%2750%27 cy=%2780%27 rx=%2723%27 ry=%275.5%27 fill=%27none%27 stroke=%27%23ff7a1a%27 stroke-width=%274%27 opacity=%27.6%27/></svg>">
+<style>
+:root {
+  box-sizing: border-box;
+  --bg: #070709;
+  --card: rgba(20, 20, 25, 0.88);
+  --card-solid: #141419;
+  --card-hover: rgba(30, 30, 38, 0.95);
+  --glass: rgba(14, 14, 18, 0.86);
+  --tx: #f7f4f0;
+  --mut: #9e968d;
+  --ac: #ff7a1a;
+  --ac2: #ffb347;
+  --acg: linear-gradient(135deg, #ff9d47 0%, #ff6a00 100%);
+  --acx: #120800;
+  --gold: #ff9a4d;
+  --glow: rgba(255, 122, 26, 0.18);
+  --tint: rgba(255, 122, 26, 0.13);
+  --bd: rgba(255, 255, 255, 0.08);
+  --bd-hover: rgba(255, 154, 77, 0.45);
+  --ok: #ffa15c;
+  --sh: 0 14px 34px -10px rgba(0, 0, 0, 0.65);
+  --grid-line: rgba(255, 122, 26, 0.045);
+  --mx: 50vw;
+  --my: 30vh;
+}
+:root[data-theme="light"] {
+  --bg: #f7f5f0;
+  --card: rgba(255, 255, 255, 0.92);
+  --card-solid: #ffffff;
+  --card-hover: #ffffff;
+  --glass: rgba(255, 255, 255, 0.9);
+  --tx: #141312;
+  --mut: #666059;
+  --ac: #e05806;
+  --ac2: #ff8533;
+  --acg: linear-gradient(135deg, #ff802b 0%, #d95000 100%);
+  --acx: #ffffff;
+  --gold: #e66c12;
+  --glow: rgba(255, 122, 26, 0.14);
+  --tint: rgba(255, 122, 26, 0.11);
+  --bd: rgba(0, 0, 0, 0.08);
+  --bd-hover: rgba(224, 88, 6, 0.45);
+  --ok: #d9560a;
+  --sh: 0 12px 28px -8px rgba(0, 0, 0, 0.09);
+  --grid-line: rgba(224, 88, 6, 0.055);
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  scroll-behavior: smooth;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--tx);
+  font-family: system-ui, -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
+  line-height: 1.5;
+  padding-top: 120px;
+  padding-bottom: 48px;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color .3s, color .2s;
+}
+body.has-sel {
+  padding-bottom: 120px;
+}
+
+/* ===== الخلفية المتحركة (محسّنة للأداء على الموبايل) ===== */
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.bg-grid {
+  position: absolute;
+  inset: -100px;
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse 80% 65% at 50% 35%, #000 35%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 35%, #000 35%, transparent 100%);
+}
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.orb-1 {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(255, 122, 26, 0.28) 0%, transparent 70%);
+  top: -160px;
+  left: 12%;
+}
+.orb-2 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255, 175, 64, 0.2) 0%, transparent 70%);
+  top: 25%;
+  right: -120px;
+}
+.orb-3 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(242, 85, 10, 0.16) 0%, transparent 70%);
+  bottom: -180px;
+  left: -100px;
+}
+.cursor-glow {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .bg-grid { animation: gridPan 22s linear infinite; }
+  .orb-1 { animation: floatOrb1 18s ease-in-out infinite alternate; }
+  .orb-2 { animation: floatOrb2 24s ease-in-out infinite alternate; }
+  .orb-3 { animation: floatOrb3 20s ease-in-out infinite alternate; }
+  .cursor-glow {
+    display: block;
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    left: var(--mx);
+    top: var(--my);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 122, 26, 0.09), transparent 65%);
+    border-radius: 50%;
+    pointer-events: none;
+    transition: left 0.08s linear, top 0.08s linear;
+  }
+}
+@keyframes gridPan {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(46px, 46px, 0); }
+}
+@keyframes floatOrb1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(110px, 80px, 0) scale(1.15); }
+}
+@keyframes floatOrb2 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-130px, 110px, 0) scale(1.12); }
+}
+@keyframes floatOrb3 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(120px, -90px, 0) scale(1.18); }
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+.wrap {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ===== الشريط العلوي ===== */
+.top {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: 20;
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bd);
+  box-shadow: 0 4px 30px rgba(0,0,0,.18);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.top::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  inset-inline: 0;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--ac), var(--ac2), var(--ac), transparent);
+}
+
+.in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0 8px;
+}
+.wm {
+  height: 28px;
+  width: auto;
+  display: block;
+  overflow: visible;
+}
+.wm path, .wm circle, .wm ellipse {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.w1 { stroke: var(--tx); }
+.w2 { stroke: var(--gold); }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.acts {
+  display: flex;
+  gap: 8px;
+}
+#top-inst, #lang, #theme {
+  height: 38px;
+  border: 1px solid var(--bd);
+  background: var(--card);
+  border-radius: 11px;
+  color: var(--tx);
+  transition: border-color .18s ease, transform .18s ease;
+}
+#top-inst {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  font-weight: 700;
+  font-size: .8rem;
+  border-color: rgba(255, 122, 26, .35);
+  background: var(--tint);
+  color: var(--ac);
+}
+#top-inst:hover, #lang:hover, #theme:hover {
+  border-color: var(--ac);
+  transform: translateY(-1px);
+}
+#lang {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  font-weight: 700;
+  font-size: .8rem;
+}
+#theme {
+  width: 38px;
+  display: grid;
+  place-items: center;
+}
+
+.tl {
+  display: flex;
+  gap: 10px;
+  padding: 0 0 11px;
+  align-items: center;
+}
+.seg {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--bg);
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+}
+.seg button {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 0;
+  background: transparent;
+  border-radius: 9px;
+  color: var(--mut);
+  font-size: .88rem;
+  font-weight: 500;
+  transition: background .18s, color .18s;
+}
+.seg button svg {
+  width: 15px;
+  height: 15px;
+}
+.seg button.on {
+  background: var(--acg);
+  color: var(--acx);
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(255, 122, 26, .35);
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+.search-wrap .s-ic {
+  position: absolute;
+  inset-inline-start: 13px;
+  color: var(--mut);
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+}
+#q {
+  width: 100%;
+  padding: 9px 36px 9px 38px;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--tx);
+  font: inherit;
+  font-size: .92rem;
+}
+#q:focus {
+  border-color: var(--ac);
+  box-shadow: 0 0 0 3px var(--tint);
+  outline: none;
+}
+.search-wrap:focus-within .s-ic {
+  color: var(--ac);
+}
+#qclr {
+  position: absolute;
+  inset-inline-end: 7px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--mut);
+  display: none;
+  place-items: center;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+#qclr.show {
+  display: grid;
+}
+
+/* ===== القسم الترحيبي ===== */
+.intro {
+  padding: 28px 4px 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  border-radius: 99px;
+  background: var(--tint);
+  border: 1px solid rgba(255, 122, 26, .28);
+  color: var(--ac);
+  font-size: .78rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.hero-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ac);
+}
+.intro h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.65rem, 4vw, 2.35rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -.015em;
+  background: linear-gradient(135deg, var(--tx) 30%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.intro p {
+  margin: 0;
+  color: var(--mut);
+  max-width: 600px;
+  font-size: 1rem;
+}
+.intro p b {
+  color: var(--ac);
+}
+.lnk {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 8px 16px;
+  background: var(--card);
+  border: 1px solid var(--bd);
+  border-radius: 99px;
+  color: var(--tx);
+  font-weight: 600;
+  font-size: .86rem;
+  text-decoration: none;
+  transition: border-color .2s, color .2s;
+}
+.lnk svg { color: var(--ac); }
+.lnk:hover {
+  border-color: var(--ac);
+  color: var(--ac);
+}
+
+/* ===== شريط الأقسام والمجموعات ===== */
+.tools { padding: 16px 0 0; }
+.chips {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding: 6px 2px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.chips::-webkit-scrollbar, .packs::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--bd);
+  background: var(--card);
+  border-radius: 99px;
+  font-size: .85rem;
+  white-space: nowrap;
+  color: var(--mut);
+}
+.chip b {
+  font-size: .72rem;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: var(--bg);
+  color: var(--mut);
+}
+.chip.on {
+  background: var(--acg);
+  color: var(--acx);
+  border-color: transparent;
+  font-weight: 700;
+}
+.chip.on b {
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff;
+}
+
+.sec-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 26px 2px 11px;
+}
+h3 {
+  margin: 26px 2px 11px;
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--mut);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+h3::before {
+  content: "";
+  width: 4px;
+  height: 15px;
+  border-radius: 4px;
+  background: var(--acg);
+  display: inline-block;
+}
+.sec-head h3 { margin: 0; }
+.sec-tog {
+  border: 1px solid var(--bd);
+  background: var(--card);
+  color: var(--ac);
+  font-size: .77rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+
+.packs {
+  display: flex;
+  gap: 9px;
+  overflow-x: auto;
+  padding: 2px 2px 6px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.pack {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 12px;
+  border: 1px solid var(--bd);
+  background: var(--card);
+  font-size: .87rem;
+  font-weight: 600;
+}
+.pack small {
+  color: var(--mut);
+  font-size: .73rem;
+  background: var(--bg);
+  padding: 1px 7px;
+  border-radius: 99px;
+}
+.pack.on {
+  border-color: var(--ac);
+  background: var(--tint);
+  color: var(--ac);
+}
+.pack.on small {
+  background: var(--ac);
+  color: var(--acx);
+}
+
+/* ===== شبكة البطاقات السريعة (High-FPS App Grid) ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 11px;
+}
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 13px;
+  border: 1px solid var(--bd);
+  border-radius: 15px;
+  background: var(--card);
+  text-align: start;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 68px;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover:not(:disabled) {
+    border-color: var(--bd-hover);
+    background: var(--card-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sh);
+  }
+}
+.card:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.card .av {
+  position: relative;
+  overflow: hidden;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: var(--tint);
+  color: var(--ac);
+  font-weight: 700;
+}
+.card.on {
+  border-color: var(--ac);
+  background: linear-gradient(145deg, var(--tint), var(--card));
+  box-shadow: inset 0 0 0 1px rgba(255, 122, 26, 0.35);
+}
+.card.on .av {
+  background: var(--ac);
+  color: var(--acx);
+}
+.av i {
+  font-style: normal;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+.av i svg {
+  width: 56%;
+  height: 56%;
+}
+.av img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 7px;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.card .av.ok, .card.on .av.ok {
+  background: #ffffff !important;
+  box-shadow: inset 0 0 0 1px var(--bd);
+}
+.av.ok i { display: none; }
+.av.ok img { opacity: 1; }
+
+.card.on::after {
+  content: "";
+  position: absolute;
+  top: 9px;
+  inset-inline-end: 10px;
+  width: 6px;
+  height: 10px;
+  border: solid var(--ac);
+  border-width: 0 2.4px 2.4px 0;
+  transform: rotate(45deg);
+}
+
+.card .nm {
+  flex: 1;
+  min-width: 0;
+  white-space: normal;
+  overflow: visible;
+  padding-inline-end: 12px;
+}
+.card .nm .t {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .92rem;
+  font-weight: 700;
+}
+.tn {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.pp {
+  flex: none;
+  font-size: .62rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: var(--tint);
+  color: var(--ac);
+  border: 1px solid rgba(255,122,26,.25);
+}
+.card.on .pp { background: var(--card-solid); }
+.card .nm small {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--mut);
+  font-size: .74rem;
+  line-height: 1.38;
+  margin-top: 3px;
+}
+
+/* ===== الإضافات والأزرار السفلية ===== */
+.add { display: flex; gap: 8px; }
+.add input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 15px;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--tx);
+  font: inherit;
+  direction: ltr;
+}
+.add input:focus {
+  border-color: var(--ac);
+  outline: none;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--bd);
+  background: var(--card);
+  font-weight: 600;
+  transition: border-color .18s, transform .15s;
+}
+.btn:hover {
+  border-color: var(--bd-hover);
+}
+.btn.pri {
+  background: var(--acg);
+  color: var(--acx);
+  border-color: transparent;
+  font-weight: 700;
+  box-shadow: 0 5px 18px rgba(255, 122, 26, .28);
+}
+.hint {
+  color: var(--mut);
+  font-size: .82rem;
+  margin: 8px 2px;
+  line-height: 1.5;
+}
+#uopt {
+  margin: 10px 0 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--bd);
+  border-radius: 11px;
+  background: var(--bg);
+}
+#uopt .hint { margin: 0 0 8px; }
+.ck {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: .86rem;
+  cursor: pointer;
+}
+.ck input {
+  margin-top: .3em;
+  accent-color: var(--ac);
+}
+.hint code, ol code {
+  direction: ltr;
+  unicode-bidi: embed;
+  background: var(--bg);
+  border: 1px solid var(--bd);
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: .84em;
+  color: var(--gold);
+}
+.tk {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 9px;
+}
+.foot {
+  margin-top: 52px;
+  padding: 28px 0 12px;
+  border-top: 1px solid var(--bd);
+  text-align: center;
+  color: var(--mut);
+  font-size: .85rem;
+}
+.foot p { margin: 0 0 6px; }
+.foot .fb {
+  font-weight: 800;
+  color: var(--tx);
+  unicode-bidi: isolate;
+}
+.foot .fb em {
+  font-style: normal;
+  color: var(--gold);
+}
+.foot .who {
+  color: var(--tx);
+  font-weight: 600;
+  font-size: .92rem;
+}
+
+/* ===== الشريط السفلي العائم ===== */
+.bar {
+  position: fixed;
+  inset-inline: 0;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 19;
+  pointer-events: none;
+  transform: translateY(140%);
+  visibility: hidden;
+  transition: transform .25s cubic-bezier(.2, .9, .2, 1), visibility 0s .25s;
+}
+.bar.show {
+  transform: none;
+  visibility: visible;
+  transition-delay: 0s;
+}
+.bar .dock {
+  pointer-events: auto;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 10px 14px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--bd-hover);
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.45);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.cnt {
+  margin-inline-end: auto;
+  font-weight: 700;
+  font-size: .95rem;
+  padding-inline-start: 6px;
+}
+
+dialog {
+  width: min(580px, 94vw);
+  border: 1px solid var(--bd-hover);
+  border-radius: 20px;
+  background: var(--card-solid);
+  color: var(--tx);
+  padding: 22px;
+  box-shadow: 0 25px 70px rgba(0,0,0,.65);
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, .68);
+}
+dialog strong { font-size: 1.1rem; }
+.dlg-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+textarea {
+  width: 100%;
+  height: 165px;
+  direction: ltr;
+  text-align: left;
+  font: 12.5px/1.55 ui-monospace, Menlo, Consolas, monospace;
+  background: var(--bg);
+  color: var(--tx);
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  padding: 12px;
+  resize: vertical;
+  margin: 10px 0 8px;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.row .btn {
+  flex: 1;
+  min-width: 130px;
+}
+ol {
+  padding-inline-start: 20px;
+  color: var(--mut);
+  font-size: .86rem;
+  margin: 10px 0 0;
+  line-height: 1.65;
+}
+#msg {
+  color: var(--ok);
+  min-height: 1.3em;
+  font-size: .88rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+.empty {
+  text-align: center;
+  color: var(--mut);
+  padding: 46px 16px;
+  border: 1px dashed var(--bd);
+  border-radius: 16px;
+  margin-top: 16px;
+  background: var(--card);
+}
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 96px;
+  transform: translate(-50%, 20px);
+  background: var(--tx);
+  color: var(--bg);
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: .88rem;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  transition: .22s;
+  z-index: 30;
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+#toast.on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.dm { margin: 12px 0 0; }
+.gs {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.gn {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--acg);
+  color: var(--acx);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: .85rem;
+}
+.gb2 { flex: 1; min-width: 0; }
+.gb2 p {
+  margin: 2px 0 8px;
+  font-size: .93rem;
+  line-height: 1.55;
+}
+.gi {
+  direction: ltr;
+  unicode-bidi: isolate;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  display: block;
+  background: var(--bg);
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+}
+dialog.sheet {
+  max-height: 90vh;
+  overflow: auto;
+  width: 100%;
+  max-width: 520px;
+  margin: auto auto 0;
+  border-radius: 20px 20px 0 0;
+  padding: 18px 16px calc(18px + env(safe-area-inset-bottom, 0px));
+}
+@media(min-width: 600px) {
+  dialog.sheet {
+    margin: auto;
+    border-radius: 20px;
+  }
+}
+.lo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  margin-top: 8px;
+  padding: 0 16px;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  background: var(--bg);
+  font-size: 1rem;
+  text-align: start;
+}
+.lo span { flex: 1; }
+.lo small { color: var(--mut); font-size: .75rem; }
+.lo.on {
+  border-color: var(--ac);
+  background: var(--tint);
+  color: var(--ac);
+  font-weight: 700;
+}
+.inst-box {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--bd);
+  background: var(--bg);
+}
+.inst-box h4 {
+  margin: 0 0 8px;
+  color: var(--ac);
+  font-size: .95rem;
+}
+.inst-box p {
+  margin: 0 0 10px;
+  font-size: .86rem;
+  color: var(--mut);
+}
+</style>
+</head>
+<body>
+<noscript><p style="padding:16px;text-align:center;font-family:system-ui,sans-serif">OneTap يحتاج تفعيل JavaScript ليعمل · OneTap needs JavaScript enabled to work.</p></noscript>
+
+<div class="bg-fx" aria-hidden="true">
+  <div class="bg-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="cursor-glow"></div>
+</div>
+
+<header class="top"><div class="wrap">
+  <div class="in">
+    <div class="brand">
+      <svg class="wm" viewBox="-2 32 396 94" role="img" aria-label="OneTap"><g><circle class="w1" cx="34" cy="70" r="30"/><path class="w1" d="M88 100V60M88 78C88 66 96 60 104 60C114 60 120 67 120 79V100"/><path class="w1" d="M134 80H174A20 20 0 1 0 167 95"/><path class="w2" d="M194 44H254M224 44V100"/><ellipse class="w2" cx="224" cy="111" rx="21" ry="4.5" style="stroke-width:3;opacity:.5"/><ellipse class="w2" cx="224" cy="111" rx="10" ry="2.2" style="stroke-width:3;opacity:.85"/><circle class="w2" cx="287" cy="80" r="20"/><path class="w2" d="M307 60V100"/><path class="w2" d="M344 60V120"/><circle class="w2" cx="364" cy="80" r="20"/></g></svg>
+    </div>
+    <span class="acts">
+      <button id="top-inst" aria-label="Install App">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+        <span data-i="inst_short"></span>
+      </button>
+      <button id="lang" aria-haspopup="dialog" aria-label="Language">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>
+        <span id="lc"></span>
+      </button>
+      <button id="theme" aria-label="Theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+      </button>
+    </span>
+  </div>
+  <div class="tl">
+    <div class="seg">
+      <button id="t-win" class="on">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5L10.5 4.5V11.5H3V5.5ZM11.5 4.3L21 3V11.5H11.5V4.3ZM3 12.5H10.5V19.5L3 18.5V12.5ZM11.5 12.5H21V21L11.5 19.7V12.5Z"/></svg>
+        <span>Windows</span>
+      </button>
+      <button id="t-mac">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+        <span>macOS</span>
+      </button>
+    </div>
+    <div class="search-wrap">
+      <svg class="s-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="ابحث عن تطبيق…">
+      <button id="qclr" type="button" aria-label="Clear">×</button>
+    </div>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <section class="intro">
+    <div class="hero-badge"><span class="dot"></span><span>Winget & Homebrew Official Installer</span></div>
+    <h1 data-i="h1"></h1>
+    <p id="ip"></p>
+    <button class="lnk" id="gopen">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5M12 16.5h.01"/></svg>
+      <span data-i="gb"></span>
+    </button>
+  </section>
+
+  <div class="tools"><div class="chips" id="chips"></div></div>
+
+  <h3 data-i="packs"></h3>
+  <div class="packs" id="packs"></div>
+
+  <div id="list"></div>
+
+  <h3 data-i="addh"></h3>
+  <div class="add">
+    <input id="cust" dir="ltr">
+    <button class="btn" id="addc" data-i="add"></button>
+  </div>
+  <p class="hint" id="chint"></p>
+
+  <h3 data-i="toolsh"></h3>
+  <div class="tk">
+    <button class="btn" id="bshare" data-i="share"></button>
+    <button class="btn" id="bexp" data-i="exp"></button>
+    <button class="btn" id="bimp" data-i="imp"></button>
+    <button class="btn" id="bupd" data-i="upd"></button>
+    <button class="btn pri" id="binst" data-i="inst"></button>
+    <input type="file" id="imf" accept=".json,application/json" hidden>
+  </div>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <p><span data-i="rights"></span> <span dir="ltr" class="fb">One<em>Tap</em></span></p>
+  <p class="who" data-i="who"></p>
+</div></footer>
+
+<div class="bar"><div class="wrap">
+  <div class="dock">
+    <span class="cnt" id="cnt"></span>
+    <button class="btn" id="none" data-i="clr"></button>
+    <button class="btn pri" id="go" data-i="go"></button>
+  </div>
+</div></div>
+<div id="toast"></div>
+
+<dialog id="ldlg" class="sheet">
+  <strong>اللغة · Language</strong>
+  <div id="llist"></div>
+</dialog>
+
+<dialog id="gdlg" class="sheet">
+  <strong data-i="gt"></strong>
+  <div id="gsteps"></div>
+  <div class="row" style="margin-top:16px"><button class="btn" id="gclose" data-i="cl"></button></div>
+</dialog>
+
+<!-- نافذة تثبيت الموقع والتطبيق على الكمبيوتر والأندرويد والآيفون -->
+<dialog id="idlg" class="sheet">
+  <strong data-i="inst_title"></strong>
+  <div id="ibody"></div>
+  <div class="row" style="margin-top:16px"><button class="btn" id="iclose" data-i="cl"></button></div>
+</dialog>
+
+<dialog id="dlg">
+  <div class="dlg-head">
+    <strong data-i="ready"></strong>
+    <div class="seg" id="fmt" style="margin:0">
+      <button type="button" data-f="ps" class="on">PowerShell</button>
+      <button type="button" data-f="bat">Batch (.bat)</button>
+    </div>
+  </div>
+  <div class="seg dm" id="dm">
+    <button data-m="i" data-i="mi"></button>
+    <button data-m="u" data-i="mu"></button>
+    <button data-m="r" data-i="mr"></button>
+  </div>
+  <div id="uopt" style="display:none">
+    <p class="hint" data-i="uw"></p>
+    <label class="ck"><input type="checkbox" id="ugr"><span data-i="ug"></span></label>
+  </div>
+  <textarea id="code" readonly></textarea>
+  <div class="row">
+    <button class="btn pri" id="ps" data-i="psb"></button>
+    <button class="btn" id="dlb" data-i="dl"></button>
+  </div>
+  <div id="msg"></div>
+  <ol id="steps"></ol>
+  <p class="hint" id="secnote" style="margin-top:10px"></p>
+  <button class="btn" id="gb" data-i="gb" style="width:100%;margin-top:6px"></button>
+  <div class="row" style="margin-top:10px"><button class="btn" id="close" data-i="cl"></button></div>
+</dialog>
+
+<script>
+var D={
+"المتصفحات":`Chrome|Google.Chrome|google-chrome
+Firefox|Mozilla.Firefox|firefox
+Brave|Brave.Brave|brave-browser
+Opera|Opera.Opera|opera
+Vivaldi|Vivaldi.Vivaldi|vivaldi
+Tor Browser|TorProject.TorBrowser|tor-browser`,
+"التواصل":`Discord|Discord.Discord|discord
+Telegram|Telegram.TelegramDesktop|telegram
+WhatsApp|WhatsApp.WhatsApp|whatsapp
+Signal|OpenWhisperSystems.Signal|signal
+Zoom|Zoom.Zoom|zoom
+Slack|SlackTechnologies.Slack|slack
+Microsoft Teams|Microsoft.Teams|microsoft-teams
+Viber|Viber.Viber|viber
+Thunderbird|Mozilla.Thunderbird|thunderbird`,
+"الوسائط":`VLC|VideoLAN.VLC|vlc
+Spotify|Spotify.Spotify|spotify
+OBS Studio|OBSProject.OBSStudio|obs
+Audacity|Audacity.Audacity|audacity
+HandBrake|HandBrake.HandBrake|handbrake
+MPV|shinchiro.mpv|mpv
+Kodi|XBMC.Kodi|kodi
+Plex|Plex.Plex|plex
+Streamlabs|Streamlabs.Streamlabs|streamlabs
+Kdenlive|KDE.Kdenlive|kdenlive
+DaVinci Resolve|BlackmagicDesign.DaVinciResolve|davinci-resolve
+FFmpeg|Gyan.FFmpeg|f:ffmpeg`,
+"البرمجة":`VS Code|Microsoft.VisualStudioCode|visual-studio-code
+Cursor|Anysphere.Cursor|cursor
+Git|Git.Git|f:git
+GitHub Desktop|GitHub.GitHubDesktop|github
+Node.js|OpenJS.NodeJS.LTS|f:node
+Python 3|Python.Python.3.12|f:python
+Java JDK 21|EclipseAdoptium.Temurin.21.JDK|temurin@21
+Go|GoLang.Go|f:go
+Rust|Rustlang.Rustup|f:rustup
+.NET SDK 8|Microsoft.DotNet.SDK.8|dotnet-sdk
+CMake|Kitware.CMake|f:cmake
+Docker Desktop|Docker.DockerDesktop|docker
+Postman|Postman.Postman|postman
+Insomnia|Insomnia.Insomnia|insomnia
+DBeaver|dbeaver.dbeaver|dbeaver-community
+PyCharm Community|JetBrains.PyCharm.Community|pycharm-ce
+IntelliJ IDEA Community|JetBrains.IntelliJIDEA.Community|intellij-idea-ce
+Android Studio|Google.AndroidStudio|android-studio
+Sublime Text|SublimeHQ.SublimeText.4|sublime-text
+Notepad++|Notepad++.Notepad++|
+Windows Terminal|Microsoft.WindowsTerminal|
+PuTTY|PuTTY.PuTTY|
+FileZilla|TimKosse.FileZilla.Client|filezilla
+Wireshark|WiresharkFoundation.Wireshark|wireshark
+Unity Hub|Unity.UnityHub|unity-hub`,
+"الأدوات":`7-Zip / Keka|7zip.7zip|keka
+WinRAR|RARLab.WinRAR|
+PowerToys|Microsoft.PowerToys|
+Everything|voidtools.Everything|
+AutoHotkey|AutoHotkey.AutoHotkey|
+Rectangle||rectangle
+Raycast||raycast
+qBittorrent|qBittorrent.qBittorrent|qbittorrent
+AnyDesk|AnyDeskSoftwareGmbH.AnyDesk|anydesk
+TeamViewer|TeamViewer.TeamViewer|teamviewer
+RustDesk|RustDesk.RustDesk|rustdesk
+Dropbox|Dropbox.Dropbox|dropbox
+Google Drive|Google.GoogleDrive|google-drive
+MEGA|Mega.MEGASync|megasync
+Syncthing|Syncthing.Syncthing|syncthing
+ShareX|ShareX.ShareX|
+Rufus|Rufus.Rufus|
+balenaEtcher|Balena.Etcher|balenaetcher
+CCleaner|Piriform.CCleaner|
+CPU-Z|CPUID.CPU-Z|
+Malwarebytes|Malwarebytes.Malwarebytes|malwarebytes
+Bitwarden|Bitwarden.Bitwarden|bitwarden
+KeePassXC|KeePassXCTeam.KeePassXC|keepassxc
+1Password|AgileBits.1Password|1password
+Proton VPN|Proton.ProtonVPN|protonvpn
+NordVPN|NordVPN.NordVPN|nordvpn`,
+"المكتب والتصميم":`LibreOffice|TheDocumentFoundation.LibreOffice|libreoffice
+ONLYOFFICE|ONLYOFFICE.DesktopEditors|onlyoffice
+Adobe Reader|Adobe.Acrobat.Reader.64-bit|adobe-acrobat-reader
+Notion|Notion.Notion|notion
+Obsidian|Obsidian.Obsidian|obsidian
+Joplin|Joplin.Joplin|joplin
+Zotero|DigitalScholar.Zotero|zotero
+Anki|Anki.Anki|anki
+draw.io|JGraph.Draw|drawio
+GIMP|GIMP.GIMP|gimp
+Inkscape|Inkscape.Inkscape|inkscape
+Krita|KDE.Krita|krita
+Blender|BlenderFoundation.Blender|blender
+Figma|Figma.Figma|figma`,
+"الألعاب":`Steam|Valve.Steam|steam
+Epic Games|EpicGames.EpicGamesLauncher|epic-games
+GOG Galaxy|GOG.Galaxy|gog-galaxy
+Battle.net|Blizzard.BattleNet|battle-net
+EA app|ElectronicArts.EADesktop|
+Ubisoft Connect|Ubisoft.Connect|
+Heroic Launcher|HeroicGamesLauncher.HeroicGamesLauncher|heroic
+Minecraft Launcher|Mojang.MinecraftLauncher|minecraft
+MSI Afterburner|Guru3D.Afterburner|`,
+"مكتبات النظام":`Visual C++ Redist 2015+|Microsoft.VCRedist.2015+.x64|
+.NET Desktop Runtime 8|Microsoft.DotNet.DesktopRuntime.8|
+DirectX|Microsoft.DirectX|`
+};
+
+var PACKS={
+  "الأساسيات":["Chrome","VLC","7-Zip / Keka","Adobe Reader","Telegram","WhatsApp","Zoom"],
+  "مبرمج":["VS Code","Git","Node.js","Python 3","Docker Desktop","Postman","Windows Terminal","GitHub Desktop"],
+  "لاعب":["Steam","Epic Games","Discord","GOG Galaxy","Battle.net","MSI Afterburner"],
+  "صانع محتوى":["OBS Studio","DaVinci Resolve","Audacity","GIMP","Blender","HandBrake","Kdenlive"],
+  "مكتب ودراسة":["LibreOffice","Adobe Reader","Notion","Obsidian","Zoom","Thunderbird","Zotero"]
+};
+
+var IC={
+  "Chrome":"googlechrome","Firefox":"firefoxbrowser","Brave":"brave","Opera":"opera","Vivaldi":"vivaldi","Tor Browser":"torbrowser",
+  "Discord":"discord","Telegram":"telegram","WhatsApp":"whatsapp","Signal":"signal","Zoom":"zoom","Viber":"viber","Thunderbird":"thunderbird",
+  "VLC":"vlcmediaplayer","Spotify":"spotify","OBS Studio":"obsstudio","Audacity":"audacity","MPV":"mpv","Kodi":"kodi","Plex":"plex","Streamlabs":"streamlabs","Kdenlive":"kdenlive","DaVinci Resolve":"davinciresolve","FFmpeg":"ffmpeg",
+  "Cursor":"cursor","Git":"git","GitHub Desktop":"github","Node.js":"nodedotjs","Python 3":"python","Java JDK 21":"eclipseadoptium","Go":"go","Rust":"rust",".NET SDK 8":"dotnet","CMake":"cmake","Docker Desktop":"docker","Postman":"postman","Insomnia":"insomnia","DBeaver":"dbeaver","PyCharm Community":"pycharm","IntelliJ IDEA Community":"intellijidea","Android Studio":"androidstudio","Sublime Text":"sublimetext","Notepad++":"notepadplusplus","FileZilla":"filezilla","Wireshark":"wireshark","Unity Hub":"unity",
+  "7-Zip / Keka":"7zip","AutoHotkey":"autohotkey","Raycast":"raycast","qBittorrent":"qbittorrent","AnyDesk":"anydesk","TeamViewer":"teamviewer","RustDesk":"rustdesk","Dropbox":"dropbox","Google Drive":"googledrive","MEGA":"mega","Syncthing":"syncthing","ShareX":"sharex","balenaEtcher":"balena","CCleaner":"ccleaner","Malwarebytes":"malwarebytes","Bitwarden":"bitwarden","KeePassXC":"keepassxc","1Password":"1password","Proton VPN":"protonvpn","NordVPN":"nordvpn",
+  "LibreOffice":"libreoffice","ONLYOFFICE":"onlyoffice","Notion":"notion","Obsidian":"obsidian","Joplin":"joplin","Zotero":"zotero","Anki":"anki","draw.io":"diagramsdotnet","GIMP":"gimp","Inkscape":"inkscape","Krita":"krita","Blender":"blender","Figma":"figma",
+  "Steam":"steam","Epic Games":"epicgames","GOG Galaxy":"gogdotcom","Battle.net":"battledotnet","EA app":"ea","Ubisoft Connect":"ubisoft","Heroic Launcher":"heroicgameslauncher",
+  "Slack":"","Microsoft Teams":"","HandBrake":"","VS Code":"","Windows Terminal":"","PuTTY":"","WinRAR":"","PowerToys":"","Everything":"","Rectangle":"","Rufus":"","CPU-Z":"","Adobe Reader":"","Minecraft Launcher":"","MSI Afterburner":"","Visual C++ Redist 2015+":"",".NET Desktop Runtime 8":"","DirectX":""
+};
+
+var DOM={
+  "Slack":"slack.com","Microsoft Teams":"teams.microsoft.com","HandBrake":"handbrake.fr",
+  "VS Code":"code.visualstudio.com","Windows Terminal":"learn.microsoft.com","PuTTY":"putty.org",
+  "WinRAR":"win-rar.com","PowerToys":"microsoft.com","Everything":"voidtools.com",
+  "Rectangle":"rectangleapp.com","Rufus":"rufus.ie","CPU-Z":"cpuid.com",
+  "Adobe Reader":"adobe.com","Minecraft Launcher":"minecraft.net","MSI Afterburner":"msi.com"
+};
+
+var IOK={},IBAD={};
+var POP=["Chrome","Firefox","Discord","Telegram","WhatsApp","Zoom","VLC","Spotify","OBS Studio","VS Code","Git","Python 3","Node.js","Docker Desktop","7-Zip / Keka","WinRAR","PowerToys","qBittorrent","AnyDesk","Google Drive","LibreOffice","Adobe Reader","GIMP","Blender","Steam","Epic Games","Visual C++ Redist 2015+","Notepad++","Bitwarden","Notion"];
+
+var DESC={"Chrome":"متصفح جوجل السريع|Fast Google browser","Firefox":"متصفح مفتوح المصدر|Open-source browser","Brave":"متصفح يحجب الإعلانات|Ad-blocking browser","Opera":"متصفح مع VPN مدمج|Browser with built-in VPN","Vivaldi":"متصفح قابل للتخصيص|Customizable browser","Tor Browser":"تصفح مجهول الهوية|Anonymous browsing",
+"Discord":"دردشة صوتية ومجتمعات|Voice chat & communities","Telegram":"مراسلة سريعة وآمنة|Fast, secure messaging","WhatsApp":"مراسلة ومكالمات|Messaging & calls","Signal":"مراسلة مشفّرة|Encrypted messaging","Zoom":"اجتماعات فيديو|Video meetings","Slack":"تواصل فرق العمل|Team messaging","Microsoft Teams":"اجتماعات وعمل جماعي|Meetings & collaboration","Viber":"مكالمات ورسائل|Calls & messages","Thunderbird":"برنامج بريد إلكتروني|Email client",
+"VLC":"مشغّل لكل صيغ الفيديو|Plays any video format","Spotify":"بث الموسيقى|Music streaming","OBS Studio":"تسجيل وبث الشاشة|Screen recording & streaming","Audacity":"تحرير الصوت|Audio editor","HandBrake":"تحويل الفيديو|Video converter","MPV":"مشغّل خفيف|Lightweight player","Kodi":"مركز وسائط منزلي|Home media center","Plex":"مكتبة أفلامك الخاصة|Your personal media library","Streamlabs":"بث مباشر|Live streaming","Kdenlive":"مونتاج فيديو مجاني|Free video editor","DaVinci Resolve":"مونتاج احترافي|Pro video editing","FFmpeg":"أدوات تحويل الوسائط|Media conversion tools",
+"VS Code":"أشهر محرر أكواد|Most popular code editor","Cursor":"محرر أكواد بالذكاء الاصطناعي|AI code editor","Git":"إدارة إصدارات الأكواد|Version control","GitHub Desktop":"واجهة Git سهلة|Easy Git interface","Node.js":"بيئة تشغيل JavaScript|JavaScript runtime","Python 3":"لغة برمجة عامة|General-purpose language","Java JDK 21":"أدوات تطوير جافا|Java dev kit","Go":"لغة برمجة من جوجل|Google's language","Rust":"لغة برمجة آمنة وسريعة|Safe, fast language",".NET SDK 8":"أدوات تطوير دوت نت|.NET dev kit","CMake":"بناء مشاريع C++|C++ build system","Docker Desktop":"تشغيل الحاويات|Run containers","Postman":"اختبار واجهات API|API testing","Insomnia":"عميل API خفيف|Lightweight API client","DBeaver":"إدارة قواعد البيانات|Database manager","PyCharm Community":"بيئة تطوير بايثون|Python IDE","IntelliJ IDEA Community":"بيئة تطوير جافا|Java IDE","Android Studio":"تطوير تطبيقات أندرويد|Android app dev","Sublime Text":"محرر نصوص سريع|Fast text editor","Notepad++":"محرر نصوص خفيف|Light text editor","Windows Terminal":"طرفية ويندوز الحديثة|Modern Windows terminal","PuTTY":"اتصال SSH بالخوادم|SSH client","FileZilla":"نقل ملفات FTP|FTP client","Wireshark":"تحليل حركة الشبكة|Network analyzer","Unity Hub":"إدارة مشاريع Unity|Unity project manager",
+"7-Zip / Keka":"ضغط وفك الملفات|Archive manager","WinRAR":"ضغط وفك الملفات|Archive manager","PowerToys":"أدوات إنتاجية لويندوز|Windows productivity tools","Everything":"بحث فوري في الملفات|Instant file search","AutoHotkey":"أتمتة المهام|Task automation","Rectangle":"تنظيم النوافذ|Window manager","Raycast":"مشغّل تطبيقات سريع|Quick launcher","qBittorrent":"تحميل التورنت|Torrent client","AnyDesk":"تحكم عن بُعد|Remote desktop","TeamViewer":"تحكم عن بُعد|Remote desktop","RustDesk":"تحكم عن بُعد مفتوح المصدر|Open-source remote desktop","Dropbox":"تخزين سحابي|Cloud storage","Google Drive":"تخزين سحابي|Cloud storage","MEGA":"تخزين سحابي مشفّر|Encrypted cloud storage","Syncthing":"مزامنة ملفات خاصة|Private file sync","ShareX":"لقطات وتسجيل الشاشة|Screenshots & capture","Rufus":"إنشاء فلاشة تثبيت|Bootable USB maker","balenaEtcher":"كتابة صور النظام|Flash OS images","CCleaner":"تنظيف الجهاز|System cleaner","CPU-Z":"معلومات العتاد|Hardware info","Malwarebytes":"مكافحة البرمجيات الخبيثة|Anti-malware","Bitwarden":"مدير كلمات المرور|Password manager","KeePassXC":"مدير كلمات مرور محلي|Offline password manager","1Password":"مدير كلمات المرور|Password manager","Proton VPN":"شبكة VPN آمنة|Secure VPN","NordVPN":"خدمة VPN|VPN service",
+"LibreOffice":"حزمة مكتبية مجانية|Free office suite","ONLYOFFICE":"حزمة مكتبية|Office suite","Adobe Reader":"قارئ PDF|PDF reader","Notion":"ملاحظات ومشاريع|Notes & projects","Obsidian":"ملاحظات مترابطة|Linked notes","Joplin":"ملاحظات مفتوحة المصدر|Open-source notes","Zotero":"إدارة المراجع البحثية|Reference manager","Anki":"بطاقات الحفظ والدراسة|Flashcards","draw.io":"رسم المخططات|Diagram maker","GIMP":"تحرير الصور|Image editor","Inkscape":"رسم متجهات|Vector graphics","Krita":"رسم رقمي|Digital painting","Blender":"نمذجة وتحريك 3D|3D & animation","Figma":"تصميم واجهات|UI design",
+"Steam":"أكبر متجر ألعاب|Biggest game store","Epic Games":"متجر ألعاب|Game store","GOG Galaxy":"ألعاب بدون DRM|DRM-free games","Battle.net":"ألعاب Blizzard|Blizzard games","EA app":"ألعاب EA|EA games","Ubisoft Connect":"ألعاب Ubisoft|Ubisoft games","Heroic Launcher":"مشغّل ألعاب مفتوح|Open game launcher","Minecraft Launcher":"لعبة ماينكرافت|Minecraft game","MSI Afterburner":"ضبط أداء كرت الشاشة|GPU tuning",
+"Visual C++ Redist 2015+":"مكتبة تشغيل البرامج|Runtime for apps",".NET Desktop Runtime 8":"بيئة تشغيل دوت نت|.NET runtime","DirectX":"مكتبة رسوميات الألعاب|Game graphics library"};
+
+var T={
+ar:{title:"OneTap | مثبّت التطبيقات بملف واحد",h1:"ثبّت كل تطبيقاتك بملف واحد",p:"اختر من {n} تطبيقًا، ثم نزّل سكربتًا واحدًا يحمّلها ويثبّتها تلقائيًا من المصادر الرسمية.",q:"ابحث عن تطبيق أو وظيفة… (اضغط /)",all:"الكل",sel:"المختارة",packs:"مجموعات جاهزة بنقرة واحدة",pop:"شائع",none:"لا توجد نتائج مطابقة للبحث",cu:"أضفتَها أنت",cnt:"{n} مختار · ≈ {m} د",clr:"مسح",go:"تحميل الكل",addh:"تطبيق غير موجود في القائمة؟",add:"إضافة",hw:"لمعرفة معرّف أي تطبيق نفّذ:",hm:"لمعرفة اسم أي تطبيق نفّذ:",nm:"اسم",toolsh:"أدوات إضافية",share:"نسخ رابط المشاركة",exp:"تصدير القائمة",imp:"استيراد قائمة",upd:"سكربت تحديث المحدد",inst:"تثبيت الموقع / التطبيق",inst_short:"تثبيت",inst_title:"تثبيت OneTap على جهازك",ready:"السكربت جاهز",mi:"تثبيت",mr:"إزالة",mu:"تحديث المحدد",dl:"تنزيل الملف",cp:"نسخ",cl:"إغلاق",dld:"بدأ التنزيل",cpd:"تم النسخ إلى الحافظة",lk:"تم نسخ رابط المشاركة",pick:"اختر تطبيقًا واحدًا على الأقل",imd:"تم استيراد القائمة",imx:"ملف غير صالح",exd:"تم تصدير القائمة",rights:"جميع الحقوق محفوظة © 2026",who:"إعداد المهندسين: عامر الديري - ماجد السليمان",sall:"تحديد القسم",uall:"إلغاء القسم",stw:"<li>نزّل الملف <code>{f}</code></li><li>شغّله بنقرتين (أو زر أيمن ← تشغيل كمسؤول)</li><li>يتطلب ويندوز 10/11 مع winget</li>",stm:"<li>نزّل الملف <code>{f}</code> أو انسخ الأوامر</li><li>افتح Terminal ونفّذ: <code>bash ~/Downloads/{f}</code></li>"},
+en:{title:"OneTap | One-file app installer",h1:"Install all your apps with one file",p:"Pick from {n} apps, then download a single script that installs them all automatically from official sources.",q:"Search apps or what they do… (press /)",all:"All",sel:"Selected",packs:"Ready-made bundles",pop:"Popular",none:"No matching results",cu:"Added by you",cnt:"{n} selected · ≈ {m} min",clr:"Clear",go:"Download all",addh:"App not in the list?",add:"Add",hw:"To find an app ID run:",hm:"To find an app name run:",nm:"name",toolsh:"More tools",share:"Copy share link",exp:"Export list",imp:"Import list",upd:"Update selected script",inst:"Install Site / App",inst_short:"Install",inst_title:"Install OneTap on your device",ready:"Your script is ready",mi:"Install",mr:"Remove",mu:"Update selected",dl:"Download file",cp:"Copy",cl:"Close",dld:"Download started",cpd:"Copied to clipboard",lk:"Share link copied",pick:"Select at least one app",imd:"List imported",imx:"Invalid file",exd:"List exported",rights:"All rights reserved © 2026",who:"Prepared by Engineers: Amer Aldiri - Majed Alsulaiman",sall:"Select category",uall:"Unselect category",stw:"<li>Download <code>{f}</code></li><li>Double-click it (or right-click → Run as administrator)</li><li>Requires Windows 10/11 with winget</li>",stm:"<li>Download <code>{f}</code> or copy the script</li><li>Open Terminal and run: <code>bash ~/Downloads/{f}</code></li>"},
+tr:{title:"OneTap | Tek dosyada uygulama yükleyici",h1:"Tüm uygulamalarını tek dosyayla kur",p:"{n} uygulama arasından seç, ardından hepsini resmi kaynaklardan otomatik kuran tek bir betik indir.",q:"Uygulama veya işlev ara…",all:"Tümü",sel:"Seçilenler",packs:"Hazır paketler",pop:"Popüler",none:"Sonuç yok",cu:"Senin eklediklerin",cnt:"{n} seçildi · ≈ {m} dk",clr:"Temizle",go:"Hepsini indir",addh:"Uygulama listede yok mu?",add:"Ekle",hw:"Bir uygulamanın kimliğini bulmak için çalıştır:",hm:"Bir uygulamanın adını bulmak için çalıştır:",nm:"ad",toolsh:"Ek araçlar",share:"Paylaşım bağlantısını kopyala",exp:"Listeyi dışa aktar",imp:"Liste içe aktar",upd:"Seçilenleri güncelle betiği",inst:"Siteyi / Uygulamayı Yükle",inst_short:"Yükle",inst_title:"OneTap'i Cihazına Yükle",ready:"Betiğin hazır",mi:"Kur",mr:"Kaldır",mu:"Seçilenleri güncelle",dl:"Dosyayı indir",cp:"Kopyala",cl:"Kapat",dld:"İndirme başladı",cpd:"Kopyalandı",lk:"Paylaşım bağlantısı kopyalandı",pick:"En az bir uygulama seç",imd:"Liste içe aktarıldı",imx:"Geçersiz dosya",exd:"Liste dışa aktarıldı",rights:"Tüm hakları saklıdır © 2026",who:"Hazırlayan Mühendisler: Amer Aldiri - Majed Alsulaiman",sall:"Tümünü seç",uall:"Seçimi kaldır",stw:"<li><code>{f}</code> dosyasını indir</li><li>Çift tıkla (veya sağ tık → Yönetici olarak çalıştır)</li><li>winget içeren Windows 10/11 gerekir</li>",stm:"<li><code>{f}</code> dosyasını indir</li><li>Terminal'i aç ve çalıştır: <code>bash ~/Downloads/{f}</code></li>"},
+fr:{title:"OneTap | Installateur d'applications en un fichier",h1:"Installez toutes vos applications avec un seul fichier",p:"Choisissez parmi {n} applications, puis téléchargez un seul script qui les installe automatiquement depuis les sources officielles.",q:"Rechercher une application ou une fonction…",all:"Tout",sel:"Sélection",packs:"Packs prêts à l'emploi",pop:"Populaire",none:"Aucun résultat",cu:"Ajoutées par vous",cnt:"{n} sélectionnée(s) · ≈ {m} min",clr:"Effacer",go:"Tout télécharger",addh:"Application absente de la liste ?",add:"Ajouter",hw:"Pour trouver l'identifiant d'une application, exécutez :",hm:"Pour trouver le nom d'une application, exécutez :",nm:"nom",toolsh:"Outils supplémentaires",share:"Copier le lien de partage",exp:"Exporter la liste",imp:"Importer une liste",upd:"Script de mise à jour (sélection)",inst:"Installer le site / l'app",inst_short:"Installer",inst_title:"Installer OneTap sur votre appareil",ready:"Votre script est prêt",mi:"Installer",mr:"Supprimer",mu:"Mettre à jour la sélection",dl:"Télécharger le fichier",cp:"Copier",cl:"Fermer",dld:"Téléchargement lancé",cpd:"Copié",lk:"Lien de partage copié",pick:"Sélectionnez au moins une application",imd:"Liste importée",imx:"Fichier invalide",exd:"Liste exportée",rights:"Tous droits réservés © 2026",who:"Préparé par les ingénieurs : Amer Aldiri - Majed Alsulaiman",sall:"Tout sélectionner",uall:"Tout désélectionner",stw:"<li>Téléchargez <code>{f}</code></li><li>Double-cliquez dessus (ou clic droit → Exécuter en tant qu'administrateur)</li><li>Nécessite Windows 10/11 avec winget</li>",stm:"<li>Téléchargez <code>{f}</code></li><li>Ouvrez Terminal et exécutez : <code>bash ~/Downloads/{f}</code></li>"},
+es:{title:"OneTap | Instalador de aplicaciones en un solo archivo",h1:"Instala todas tus aplicaciones con un solo archivo",p:"Elige entre {n} aplicaciones y descarga un único script que las instala automáticamente desde fuentes oficiales.",q:"Buscar aplicación o función…",all:"Todo",sel:"Seleccionadas",packs:"Paquetes listos",pop:"Popular",none:"Sin resultados",cu:"Añadidas por ti",cnt:"{n} seleccionadas · ≈ {m} min",clr:"Borrar",go:"Descargar todo",addh:"¿Tu aplicación no está en la lista?",add:"Añadir",hw:"Para encontrar el ID de una aplicación ejecuta:",hm:"Para encontrar el nombre de una aplicación ejecuta:",nm:"nombre",toolsh:"Más herramientas",share:"Copiar enlace para compartir",exp:"Exportar lista",imp:"Importar lista",upd:"Script para actualizar selección",inst:"Instalar sitio / app",inst_short:"Instalar",inst_title:"Instalar OneTap en tu dispositivo",ready:"Tu script está listo",mi:"Instalar",mr:"Desinstalar",mu:"Actualizar selección",dl:"Descargar archivo",cp:"Copiar",cl:"Cerrar",dld:"Descarga iniciada",cpd:"Copiado",lk:"Enlace copiado",pick:"Selecciona al menos una aplicación",imd:"Lista importada",imx:"Archivo no válido",exd:"Lista exportada",rights:"Todos los derechos reservados © 2026",who:"Preparado por los ingenieros: Amer Aldiri - Majed Alsulaiman",sall:"Seleccionar categoría",uall:"Deseleccionar",stw:"<li>Descarga <code>{f}</code></li><li>Haz doble clic (o clic derecho → Ejecutar como administrador)</li><li>Requiere Windows 10/11 con winget</li>",stm:"<li>Descarga <code>{f}</code></li><li>Abre Terminal y ejecuta: <code>bash ~/Downloads/{f}</code></li>"}
+};
+
+T.ar.psb="نسخ الأمر";T.ar.stp="<li>افتح PowerShell (ابحث عنه في قائمة ابدأ)</li><li>الصق الأمر (Ctrl+V) ثم اضغط Enter</li><li>يتطلب winget وهو مدمج في ويندوز 10/11</li>";T.ar.sec="ملاحظة: عند تنزيل ملف .bat قد يظهر تنبيه SmartScreen اعتيادي من المتصفح. لتجنّبه يمكنك استخدام خيار «نسخ الأمر» ولصقه مباشرة في PowerShell.";
+T.en.psb="Copy command";T.en.stp="<li>Open PowerShell (search for it in the Start menu)</li><li>Paste the command (Ctrl+V) and press Enter</li><li>Requires winget, included in Windows 10/11</li>";T.en.sec="Note: Downloading a .bat file may trigger a standard browser SmartScreen warning. You can avoid it by using 'Copy command' directly in PowerShell.";
+T.tr.psb="Komutu kopyala";T.tr.stp="<li>PowerShell'i aç (Başlat menüsünde ara)</li><li>Komutu yapıştır (Ctrl+V) ve Enter'a bas</li><li>Windows 10/11'de bulunan winget gerekir</li>";T.tr.sec="Dosyayı indirirken tarayıcının veya Windows SmartScreen'in uyarı vermesi normaldir. Komutu PowerShell'e kopyalayarak bundan kaçınabilirsin.";
+T.fr.psb="Copier la commande";T.fr.stp="<li>Ouvrez PowerShell (cherchez-le dans le menu Démarrer)</li><li>Collez la commande (Ctrl+V) puis appuyez sur Entrée</li><li>Nécessite winget, inclus dans Windows 10/11</li>";T.fr.sec="Un avertissement SmartScreen au téléchargement du .bat est normal. Évitez-le en copiant la commande dans PowerShell.";
+T.es.psb="Copiar comando";T.es.stp="<li>Abre PowerShell (búscalo en el menú Inicio)</li><li>Pega el comando (Ctrl+V) y pulsa Enter</li><li>Requiere winget, incluido en Windows 10/11</li>";T.es.sec="Un aviso de SmartScreen al descargar el .bat es normal. Evítalo copiando el comando directamente en PowerShell.";
+
+T.ar.uw="سيتم تحديث التطبيقات التي قمت بتحديدها في القائمة فقط إلى أحدث إصدار رسمي.";T.ar.ug="تحديث جميع البرامج المثبّتة على الجهاز بدلاً من المحددة فقط";T.ar.md="اختر تطبيقاتك ونزّل سكربتًا واحدًا يثبّتها كلها تلقائيًا على ويندوز وماك من المصادر الرسمية.";
+T.en.uw="Only the apps you selected in the list will be upgraded to their latest official version.";T.en.ug="Upgrade ALL installed programs on this PC instead of only selected ones";T.en.md="Pick your apps and get one script that installs them all automatically on Windows and macOS from official sources.";
+T.tr.uw="Yalnızca listeden seçtiğin uygulamalar en son resmi sürümlerine güncellenecektir.";T.tr.ug="Yalnızca seçilenler yerine bilgisayardaki TÜM kurulu programları güncelle";T.tr.md="Uygulamalarını seç, Windows ve macOS'ta hepsini resmi kaynaklardan otomatik kuran tek bir betik indir.";
+T.fr.uw="Seules les applications sélectionnées dans la liste seront mises à jour vers leur dernière version officielle.";T.fr.ug="Mettre à jour TOUS les programmes installés sur l'ordinateur au lieu de la sélection uniquement";T.fr.md="Choisissez vos applications et obtenez un seul script qui les installe automatiquement sur Windows et macOS depuis des sources officielles.";
+T.es.uw="Solo las aplicaciones que hayas seleccionado en la lista se actualizarán a su última versión oficial.";T.es.ug="Actualizar TODOS los programas instalados en el equipo en lugar de solo los seleccionados";T.es.md="Elige tus aplicaciones y obtén un solo script que las instala automáticamente en Windows y macOS desde fuentes oficiales.";
+
+T.ar.cpx="تعذّر النسخ تلقائيًا. انسخ النص يدويًا (Ctrl+C)";T.ar.gb="كيف أحمّل؟ شرح بالصور";T.ar.gt="طريقة التحميل خطوة بخطوة";T.ar.s0="اختر التطبيقات التي تريدها، ثم اضغط «تحميل الكل».";T.ar.s1="اضغط «نسخ الأمر». لا حاجة لتنزيل أي ملف.";T.ar.s2w="افتح PowerShell: اضغط زر ويندوز ثم اكتب PowerShell واضغط Enter.";T.ar.s2m="افتح Terminal: اضغط Cmd + Space ثم اكتب Terminal واضغط Enter.";T.ar.s3="الصق الأمر داخل النافذة بالضغط على {k}.";T.ar.s4w="اضغط Enter وانتظر حتى ينتهي التثبيت. إن ظهرت نافذة تطلب الإذن اضغط «نعم».";T.ar.s4m="اضغط Enter وانتظر. إن طُلبت كلمة السر فاكتبها (لا تظهر أثناء الكتابة) ثم اضغط Enter.";
+T.en.cpx="Couldn't copy automatically. Please copy the text manually (Ctrl+C)";T.en.gb="How do I install? Step-by-step guide";T.en.gt="Install step by step";T.en.s0="Pick the apps you want, then press “Download all”.";T.en.s1="Press “Copy command”. No file download needed.";T.en.s2w="Open PowerShell: press the Windows key, type PowerShell and press Enter.";T.en.s2m="Open Terminal: press Cmd + Space, type Terminal and press Enter.";T.en.s3="Paste the command into the window with {k}.";T.en.s4w="Press Enter and wait for the installs to finish. If a permission prompt appears, click “Yes”.";T.en.s4m="Press Enter and wait. If asked for your password, type it (it stays invisible) and press Enter.";
+T.tr.cpx="Otomatik kopyalanamadı. Metni elle kopyala (Ctrl+C)";T.tr.gb="Nasıl indiririm? Resimli anlatım";T.tr.gt="Adım adım kurulum";T.tr.s0="İstediğin uygulamaları seç, sonra “Hepsini indir”e bas.";T.tr.s1="“Komutu kopyala”ya bas. Dosya indirmene gerek yok.";T.tr.s2w="PowerShell'i aç: Windows tuşuna bas, PowerShell yaz ve Enter'a bas.";T.tr.s2m="Terminal'i aç: Cmd + Space'e bas, Terminal yaz ve Enter'a bas.";T.tr.s3="Komutu {k} ile pencereye yapıştır.";T.tr.s4w="Enter'a bas ve kurulumun bitmesini bekle. İzin penceresi çıkarsa “Evet”e tıkla.";T.tr.s4m="Enter'a bas ve bekle. Parola istenirse yaz (görünmez) ve Enter'a bas.";
+T.fr.cpx="Copie automatique impossible. Copiez le texte à la main (Ctrl+C)";T.fr.gb="Comment installer ? Guide en images";T.fr.gt="Installation pas à pas";T.fr.s0="Choisissez les applications, puis appuyez sur « Tout télécharger ».";T.fr.s1="Appuyez sur « Copier la commande ». Aucun fichier à télécharger.";T.fr.s2w="Ouvrez PowerShell : touche Windows, tapez PowerShell puis Entrée.";T.fr.s2m="Ouvrez Terminal : Cmd + Espace, tapez Terminal puis Entrée.";T.fr.s3="Collez la commande dans la fenêtre avec {k}.";T.fr.s4w="Appuyez sur Entrée et attendez la fin. Si une demande d'autorisation apparaît, cliquez sur « Oui ».";T.fr.s4m="Appuyez sur Entrée et attendez. Si on vous demande le mot de passe, saisissez-le (invisible) puis Entrée.";
+T.es.cpx="No se pudo copiar automáticamente. Copia el texto a mano (Ctrl+C)";T.es.gb="¿Cómo instalo? Guía con imágenes";T.es.gt="Instalación paso a paso";T.es.s0="Elige las aplicaciones y pulsa «Descargar todo».";T.es.s1="Pulsa «Copiar comando». No hace falta descargar ningún archivo.";T.es.s2w="Abre PowerShell: tecla Windows, escribe PowerShell y pulsa Enter.";T.es.s2m="Abre Terminal: Cmd + Espacio, escribe Terminal y pulsa Enter.";T.es.s3="Pega el comando en la ventana con {k}.";T.es.s4w="Pulsa Enter y espera a que termine. Si aparece un aviso de permiso, pulsa «Sí».";T.es.s4m="Pulsa Enter y espera. Si pide la contraseña, escríbela (no se ve) y pulsa Enter.";
+
+var CN={en:["Browsers","Communication","Media","Development","Utilities","Office & Design","Games","System Libraries"],tr:["Tarayıcılar","İletişim","Medya","Geliştirme","Araçlar","Ofis ve Tasarım","Oyunlar","Sistem Kütüphaneleri"],fr:["Navigateurs","Communication","Multimédia","Développement","Utilitaires","Bureautique et design","Jeux","Bibliothèques système"],es:["Navegadores","Comunicación","Multimedia","Desarrollo","Utilidades","Ofimática y diseño","Juegos","Bibliotecas del sistema"]};
+var PN={en:["Essentials","Developer","Gamer","Creator","Office & Study"],tr:["Temel","Yazılımcı","Oyuncu","İçerik üretici","Ofis ve ders"],fr:["Essentiels","Développeur","Joueur","Créateur","Bureau et études"],es:["Esenciales","Desarrollador","Jugador","Creador","Oficina y estudio"]};
+
+var G=0,DL={
+tr:"Hızlı Google tarayıcısı;Açık kaynaklı tarayıcı;Reklam engelleyen tarayıcı;Dahili VPN'li tarayıcı;Özelleştirilebilir tarayıcı;Anonim gezinme;Sesli sohbet ve topluluklar;Hızlı ve güvenli mesajlaşma;Mesajlaşma ve aramalar;Şifreli mesajlaşma;Görüntülü toplantılar;Ekip iletişimi;Toplantı ve iş birliği;Arama ve mesajlar;E-posta istemcisi;Her video biçimini oynatır;Müzik akışı;Ekran kaydı ve yayın;Ses düzenleyici;Video dönüştürücü;Hafif oynatıcı;Ev medya merkezi;Kişisel medya kütüphanen;Canlı yayın;Ücretsiz video düzenleyici;Profesyonel video kurgu;Medya dönüştürme araçları;En popüler kod editörü;Yapay zekâlı kod editörü;Sürüm kontrolü;Kolay Git arayüzü;JavaScript çalışma ortamı;Genel amaçlı dil;Java geliştirme kiti;Google'ın dili;Güvenli ve hızlı dil;.NET geliştirme kiti;C++ derleme sistemi;Konteyner çalıştırma;API testi;Hafif API istemcisi;Veritabanı yöneticisi;Python IDE'si;Java IDE'si;Android uygulama geliştirme;Hızlı metin editörü;Hafif metin editörü;Modern Windows terminali;SSH istemcisi;FTP istemcisi;Ağ analizcisi;Unity proje yöneticisi;Arşiv yöneticisi;Arşiv yöneticisi;Windows verimlilik araçları;Anında dosya arama;Görev otomasyonu;Pencere yöneticisi;Hızlı başlatıcı;Torrent istemcisi;Uzak masaüstü;Uzak masaüstü;Açık kaynak uzak masaüstü;Bulut depolama;Bulut depolama;Şifreli bulut depolama;Özel dosya eşitleme;Ekran görüntüsü ve kayıt;Önyüklenebilir USB oluşturucu;İşletim sistemi imajı yazıcı;Sistem temizleyici;Donanım bilgisi;Kötü amaçlı yazılım koruması;Parola yöneticisi;Çevrimdışı parola yöneticisi;Parola yöneticisi;Güvenli VPN;VPN hizmeti;Ücretsiz ofis paketi;Ofis paketi;PDF okuyucu;Not ve projeler;Bağlantılı notlar;Açık kaynak notlar;Kaynak yöneticisi;Bilgi kartları;Diyagram çizici;Görsel düzenleyici;Vektör grafik;Dijital resim;3B ve animasyon;Arayüz tasarımı;En büyük oyun mağazası;Oyun mağazası;DRM'siz oyunlar;Blizzard oyunları;EA oyunları;Ubisoft oyunları;Açık oyun başlatıcı;Minecraft oyunu;Ekran kartı ayarı;Uygulama çalışma kütüphanesi;.NET çalışma ortamı;Oyun grafik kütüphanesi".split(";"),
+fr:"Navigateur Google rapide;Navigateur open source;Navigateur anti-pubs;Navigateur avec VPN intégré;Navigateur personnalisable;Navigation anonyme;Chat vocal et communautés;Messagerie rapide et sûre;Messages et appels;Messagerie chiffrée;Visioconférence;Messagerie d'équipe;Réunions et collaboration;Appels et messages;Client e-mail;Lit tous les formats vidéo;Streaming musical;Capture et diffusion d'écran;Éditeur audio;Convertisseur vidéo;Lecteur léger;Centre multimédia;Votre médiathèque perso;Diffusion en direct;Montage vidéo gratuit;Montage vidéo pro;Outils de conversion média;Éditeur de code n°1;Éditeur de code IA;Gestion de versions;Interface Git simple;Environnement JavaScript;Langage polyvalent;Kit de dev Java;Langage de Google;Langage sûr et rapide;Kit de dev .NET;Système de build C++;Exécuter des conteneurs;Test d'API;Client API léger;Gestionnaire de bases de données;IDE Python;IDE Java;Dev d'apps Android;Éditeur de texte rapide;Éditeur de texte léger;Terminal Windows moderne;Client SSH;Client FTP;Analyseur réseau;Gestionnaire de projets Unity;Gestionnaire d'archives;Gestionnaire d'archives;Outils de productivité Windows;Recherche de fichiers instantanée;Automatisation de tâches;Gestion des fenêtres;Lanceur rapide;Client torrent;Bureau à distance;Bureau à distance;Bureau à distance open source;Stockage cloud;Stockage cloud;Cloud chiffré;Synchro de fichiers privée;Captures et enregistrement d'écran;Créateur de clé USB bootable;Écriture d'images système;Nettoyeur système;Infos matériel;Anti-malware;Gestionnaire de mots de passe;Gestionnaire de mots de passe local;Gestionnaire de mots de passe;VPN sécurisé;Service VPN;Suite bureautique gratuite;Suite bureautique;Lecteur PDF;Notes et projets;Notes liées;Notes open source;Gestion de références;Cartes mémoire;Créateur de schémas;Éditeur d'images;Graphisme vectoriel;Peinture numérique;3D et animation;Design d'interfaces;Plus grande boutique de jeux;Boutique de jeux;Jeux sans DRM;Jeux Blizzard;Jeux EA;Jeux Ubisoft;Lanceur de jeux ouvert;Jeu Minecraft;Réglage de la carte graphique;Bibliothèque d'exécution;Environnement .NET;Bibliothèque graphique de jeux".split(";"),
+es:"Navegador rápido de Google;Navegador de código abierto;Navegador sin anuncios;Navegador con VPN integrada;Navegador personalizable;Navegación anónima;Chat de voz y comunidades;Mensajería rápida y segura;Mensajes y llamadas;Mensajería cifrada;Videoreuniones;Mensajería de equipos;Reuniones y colaboración;Llamadas y mensajes;Cliente de correo;Reproduce cualquier vídeo;Música en streaming;Grabación y emisión de pantalla;Editor de audio;Conversor de vídeo;Reproductor ligero;Centro multimedia;Tu biblioteca multimedia;Transmisión en vivo;Editor de vídeo gratis;Edición de vídeo pro;Herramientas de conversión;El editor de código más popular;Editor de código con IA;Control de versiones;Interfaz Git sencilla;Entorno de JavaScript;Lenguaje de propósito general;Kit de desarrollo Java;Lenguaje de Google;Lenguaje seguro y rápido;Kit de desarrollo .NET;Sistema de compilación C++;Ejecutar contenedores;Pruebas de API;Cliente API ligero;Gestor de bases de datos;IDE de Python;IDE de Java;Desarrollo de apps Android;Editor de texto rápido;Editor de texto ligero;Terminal moderna de Windows;Cliente SSH;Cliente FTP;Analizador de red;Gestor de proyectos Unity;Gestor de archivos comprimidos;Gestor de archivos comprimidos;Herramientas de productividad;Búsqueda instantánea de archivos;Automatización de tareas;Gestor de ventanas;Lanzador rápido;Cliente torrent;Escritorio remoto;Escritorio remoto;Escritorio remoto abierto;Almacenamiento en la nube;Almacenamiento en la nube;Nube cifrada;Sincronización privada;Capturas y grabación;Creador de USB de arranque;Grabador de imágenes de sistema;Limpiador del sistema;Información del hardware;Antimalware;Gestor de contraseñas;Gestor de contraseñas local;Gestor de contraseñas;VPN segura;Servicio VPN;Suite ofimática gratuita;Suite ofimática;Lector de PDF;Notas et proyectos;Notas enlazadas;Notas de código abierto;Gestor de referencias;Tarjetas de estudio;Creador de diagramas;Editor de imágenes;Gráficos vectoriales;Pintura digital;3D y animación;Diseño de interfaces;La mayor tienda de juegos;Tienda de juegos;Juegos sin DRM;Juegos de Blizzard;Juegos de EA;Juegos de Ubisoft;Lanzador de juegos abierto;Juego Minecraft;Ajuste de la tarjeta gráfica;Biblioteca de ejecución;Entorno .NET;Biblioteca gráfica de juegos".split(";")};
+
+var $=function(i){return document.getElementById(i)},A=[],os="win",sel={},custom=[],cat="all",q="",lang="ar",mode="i",wfmt="ps",dp=null,tm,ua=false;
+function t(k,o){var s=T[lang][k]||T.ar[k]||"";for(var x in o)s=s.split("{"+x+"}").join(o[x]);return s}
+function cl(c){return lang=="ar"?c:CN[lang][Object.keys(D).indexOf(c)]}
+function okc(v){return /^[\w.+@\-]+$/.test(v)}
+
+Object.keys(D).forEach(function(c,ci){
+  D[c].split("\n").forEach(function(r,i){
+    var p=r.split("|"),b=p[2]||"";
+    A.push({g:G++,c:c,ci:ci,i:i,n:p[0],w:p[1]||"",b:b.replace("f:",""),f:b.indexOf("f:")==0,p:POP.indexOf(p[0])>=0?1:0});
+  });
+});
+A.sort(function(a,b){return a.ci-b.ci||b.p-a.p||a.i-b.i});
+function id(a){return os=="win"?a.w:a.b}
+
+if(window.matchMedia("(hover: hover) and (pointer: fine)").matches){
+  addEventListener("pointermove",function(e){
+    if(e.pointerType==="mouse"){
+      document.documentElement.style.setProperty("--mx",e.clientX+"px");
+      document.documentElement.style.setProperty("--my",e.clientY+"px");
+    }
+  },{passive:true});
+}
+
+var GL={globe:"<circle cx='12' cy='12' r='9'/><path d='M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18'/>",chat:"<path d='M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z'/>",play:"<circle cx='12' cy='12' r='9'/><path d='M10 8.5l6 3.5-6 3.5z'/>",code:"<path d='M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16'/>",sliders:"<path d='M4 7h10M18 7h2M4 17h2M10 17h10'/><circle cx='16' cy='7' r='2'/><circle cx='8' cy='17' r='2'/>",doc:"<path d='M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z'/><path d='M14 3v5h5M9 13h6M9 17h6'/>",gamepad:"<path d='M6 8h12a4 4 0 0 1 4 4v2a3 3 0 0 1-5.2 2l-1.3-1.5h-7L7.2 16A3 3 0 0 1 2 14v-2a4 4 0 0 1 4-4z'/><path d='M7 11v3M5.5 12.5h3M16 11.5h.01M18 13.5h.01'/>",chip:"<rect x='6' y='6' width='12' height='12' rx='2'/><path d='M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4'/>",term:"<path d='M4 17l6-6-6-6M12 19h8'/>",hash:"<path d='M5 9h14M5 15h14M10 4L8 20M16 4l-2 16'/>",users:"<circle cx='9' cy='8' r='3'/><path d='M3 20v-1a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5v1'/><circle cx='17.5' cy='9' r='2'/><path d='M18 14a4 4 0 0 1 3 4v2'/>",conv:"<path d='M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2M20 4v5h-5M4 20v-5h5'/>",archive:"<rect x='3' y='4' width='18' height='5' rx='1'/><path d='M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9M10 13h4'/>",zap:"<path d='M13 2L4 14h7l-1 8 9-12h-7z'/>",search:"<circle cx='11' cy='11' r='7'/><path d='M21 21l-5-5'/>",split:"<rect x='3' y='4' width='18' height='16' rx='2'/><path d='M12 4v16M3 12h9'/>",usb:"<rect x='7' y='9' width='10' height='13' rx='2'/><path d='M9 9V3h6v6M10.5 5.5h.01M13.5 5.5h.01'/>",disc:"<circle cx='12' cy='12' r='9'/><circle cx='12' cy='12' r='3'/>",cube:"<path d='M12 3l8 4.5v9L12 21l-8-4.5v-9z'/><path d='M12 12l8-4.5M12 12L4 7.5M12 12v9'/>",gauge:"<path d='M4 17a8 8 0 1 1 16 0'/><path d='M12 17l4-5'/>",braces:"<path d='M8 4c-2 0-3 1-3 3v3c0 1.2-.8 2-2 2 1.2 0 2 .8 2 2v3c0 2 1 3 3 3M16 4c2 0 3 1 3 3v3c0 1.2.8 2 2 2-1.2 0-2 .8-2 2v3c0 2-1 3-3 3'/>",x:"<path d='M6 6l12 12M18 6L6 18'/>",gear:"<circle cx='12' cy='12' r='3'/><path d='M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1'/>"};
+var CC={"المتصفحات":["#e8590c","globe"],"التواصل":["#f2751f","chat"],"الوسائط":["#c2410c","play"],"البرمجة":["#d9691a","code"],"الأدوات":["#525252","sliders"],"المكتب والتصميم":["#ea7a2e","doc"],"الألعاب":["#9a3412","gamepad"],"مكتبات النظام":["#737373","chip"]};
+var SP={"Slack":["#4a154b","hash"],"Microsoft Teams":["#5059c9","users"],"HandBrake":["#e0662b","conv"],"VS Code":["#007acc","code"],"Windows Terminal":["#1f2937","term"],"PuTTY":["#0f766e","term"],"WinRAR":["#7c3aed","archive"],"PowerToys":["#2563eb","zap"],"Everything":["#f97316","search"],"Rectangle":["#0ea5e9","split"],"Rufus":["#374151","usb"],"balenaEtcher":["#06b6d4","disc"],"CPU-Z":["#dc2626","chip"],"Adobe Reader":["#dc2626","doc"],"Minecraft Launcher":["#16a34a","cube"],"MSI Afterburner":["#b91c1c","gauge"],"Visual C++ Redist 2015+":["#6d28d9","braces"],".NET Desktop Runtime 8":["#512bd4","chip"],"DirectX":["#059669","x"]};
+
+function iconUrl(n){
+  var sl = n in IC ? IC[n] : n.toLowerCase().replace(/[^a-z0-9]/g,"");
+  if(sl) return "https://cdn.simpleicons.org/" + sl;
+  if(DOM[n]) return "https://www.google.com/s2/favicons?sz=64&domain=" + DOM[n];
+  return "";
+}
+
+function av(n,c){
+  var url=iconUrl(n), g=SP[n]||CC[c]||["#6b6b6b","gear"],
+  L="<i><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>"+GL[g[1]]+"</svg></i>",
+  st=" style='background:"+g[0]+";color:#fff'";
+  if(!url||IBAD[n]) return "<span class='av'"+st+">"+L+"</span>";
+  return "<span class='av"+(IOK[n]?" ok":"")+"'"+st+">"+L+"<img data-app='"+n+"' src='"+url+"' alt='' loading='lazy' decoding='async'></span>";
+}
+
+$("list").addEventListener("load",function(e){
+  var el=e.target;
+  if(el.tagName=="IMG"){IOK[el.dataset.app]=1;el.parentNode.classList.add("ok")}
+},true);
+
+$("list").addEventListener("error",function(e){
+  var el=e.target;
+  if(el.tagName=="IMG"){
+    var app=el.dataset.app;
+    if(DOM[app] && el.src.indexOf("google.com/s2/favicons")<0){
+      el.src="https://www.google.com/s2/favicons?sz=64&domain="+DOM[app];
+      return;
+    }
+    IBAD[app]=1;
+    el.remove();
+  }
+},true);
+
+function count(){var n=custom.length;A.forEach(function(a){if(sel[a.n]&&id(a))n++});return n}
+function save(){try{localStorage.setItem("ot",JSON.stringify(snap()))}catch(e){}}
+function snap(){return{os:os,lang:lang,s:A.filter(function(a){return sel[a.n]}).map(function(a){return a.n}),c:custom}}
+function ld(o){if(o.os=="win"||o.os=="mac")os=o.os;if(T.hasOwnProperty(o.lang))lang=o.lang;sel={};(o.s||[]).forEach(function(n){sel[n]=true});custom=(o.c||[]).filter(okc)}
+
+function chips(){
+  var tot=0, catCounts={};
+  A.forEach(function(a){
+    if(id(a)){
+      tot++;
+      catCounts[a.c]=(catCounts[a.c]||0)+1;
+    }
+  });
+  var selCount=count();
+  var h=[["all",t("all"),tot]].concat(
+    Object.keys(D).map(function(c){return[c,cl(c),catCounts[c]||0]}),
+    [["sel",t("sel"),selCount]]
+  );
+  $("chips").innerHTML=h.map(function(x){
+    return"<button class='chip"+(cat==x[0]?" on":"")+"' data-c='"+x[0]+"'><span>"+x[1]+"</span><b>"+x[2]+"</b></button>";
+  }).join("");
+}
+
+function renderPacks(){
+  $("packs").innerHTML=Object.keys(PACKS).map(function(k){
+    var items=PACKS[k].filter(function(n){
+      var found=A.find(function(a){return a.n==n});
+      return found && id(found);
+    });
+    var allOn=items.length>0 && items.every(function(n){return sel[n]});
+    var label=(lang=="ar"?k:PN[lang][Object.keys(PACKS).indexOf(k)]);
+    return"<button class='pack"+(allOn?" on":"")+"' data-k='"+k+"'><span>"+label+"</span><small>"+items.length+"</small></button>";
+  }).join("");
+}
+
+/* تحديث سريع للحالة دون إعادة بناء DOM الكامل (يمنع التعليق على الأندرويد) */
+function syncState(){
+  chips();
+  renderPacks();
+  document.querySelectorAll("[data-cat-tog]").forEach(function(btn){
+    var cName=btn.dataset.catTog;
+    var catApps=A.filter(function(x){return x.c==cName && id(x)});
+    var allCatSel=catApps.length>0 && catApps.every(function(x){return sel[x.n]});
+    btn.textContent=t(allCatSel?"uall":"sall");
+  });
+  var n=count();
+  $("cnt").textContent=t("cnt",{n:n,m:Math.max(1,Math.round(n*1.5))});
+  document.querySelector(".bar").classList.toggle("show",n>0);
+  document.body.classList.toggle("has-sel",n>0);
+  save();
+}
+
+function render(){
+  var h="",cur="",open=0,any=0,qq=q.toLowerCase();
+  A.forEach(function(a){
+    if(!id(a))return;
+    if(cat=="sel"?!sel[a.n]:(cat!="all"&&cat!=a.c))return;
+    var d=(DESC[a.n]||"|").split("|"),ds=lang=="ar"?d[0]:lang=="en"?d[1]:(DL[lang][a.g]||d[1]);
+    if(qq&&(a.n+" "+d.join(" ")+" "+ds).toLowerCase().indexOf(qq)<0)return;
+    if(a.c!=cur){
+      if(open)h+="</div>";
+      cur=a.c;
+      var catApps=A.filter(function(x){return x.c==cur && id(x)});
+      var allCatSel=catApps.length>0 && catApps.every(function(x){return sel[x.n]});
+      h+="<div class='sec-head'><h3>"+cl(cur)+"</h3><button type='button' class='sec-tog' data-cat-tog='"+cur+"'>"+t(allCatSel?"uall":"sall")+"</button></div><div class='grid'>";
+      open=1;
+    }
+    any=1;
+    h+="<button class='card"+(sel[a.n]?" on":"")+"' data-n='"+a.n+"'>"+av(a.n,a.c)+"<span class='nm'><span class='t'><span class='tn'>"+a.n+"</span>"+(a.p?"<b class='pp'>"+t("pop")+"</b>":"")+"</span><small>"+ds+"</small></span></button>";
+  });
+  if(open)h+="</div>";
+  if(!any&&!(custom.length&&(cat=="all"||cat=="sel")))h="<div class='empty'>"+t("none")+"</div>";
+  if(custom.length&&(cat=="all"||cat=="sel")){
+    h+="<h3>"+t("cu")+"</h3><div class='grid'>"+custom.map(function(c,i){
+      return"<button class='card on' data-x='"+i+"'><span class='av'><i>"+c.charAt(0).toUpperCase()+"</i></span><span class='nm'><span class='t'><span class='tn' dir='ltr'>"+c+"</span></span></span></button>";
+    }).join("")+"</div>";
+  }
+  $("list").innerHTML=h;
+  syncState();
+}
+
+function osui(){
+  guide();
+  $("t-win").className=os=="win"?"on":"";
+  $("t-mac").className=os=="mac"?"on":"";
+  $("cust").placeholder=os=="win"?"Zoom.Zoom":"wget";
+  $("chint").innerHTML=t(os=="win"?"hw":"hm")+" <code>"+(os=="win"?"winget":"brew")+" search "+t("nm")+"</code>";
+}
+
+function ui(){
+  var r=document.documentElement;
+  r.lang=lang;
+  r.dir=lang=="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-i]").forEach(function(e){e.textContent=t(e.dataset.i)});
+  var availCount=A.filter(function(a){return id(a)}).length;
+  $("ip").innerHTML=t("p",{n:"<b>"+availCount+"</b>"});
+  $("q").placeholder=t("q");
+  lui();
+  document.title=t("title");
+  try{var md=document.querySelector('meta[name="description"]');if(md)md.content=t("md")}catch(e){}
+  osui();
+  render();
+  dlgui();
+  hh();
+}
+
+function say(k){
+  if($("dlg").open){
+    $("msg").textContent=t(k);
+  }else{
+    var e=$("toast");
+    e.textContent=t(k);
+    e.classList.add("on");
+    clearTimeout(tm);
+    tm=setTimeout(function(){e.classList.remove("on")},2200);
+  }
+}
+
+function cpy(s,k){
+  function ok(){say(k)}
+  function fb(){
+    var host=document.querySelector("dialog[open]")||document.body,x=document.createElement("textarea"),r=false;
+    x.value=s;x.setAttribute("readonly","");x.style.cssText="position:fixed;top:0;left:0;width:1px;height:1px;opacity:0";
+    host.appendChild(x);x.focus();x.select();x.setSelectionRange(0,s.length);
+    try{r=document.execCommand("copy")}catch(e){}
+    x.remove();
+    if(r)ok();else{if($("dlg").open){$("code").focus();$("code").select()}say("cpx")}
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(ok,fb)}else fb();
+}
+
+function ill(i){
+  var w=os=="win",sh=w?"PowerShell":"Terminal",b="";
+  function F(x,y,ww,h,r,f,st){return"<rect x='"+x+"' y='"+y+"' width='"+ww+"' height='"+h+"' rx='"+r+"' style='fill:"+f+";stroke:"+(st||"none")+"'/>"}
+  function X(x,y,z,f,txt,wt){return"<text x='"+x+"' y='"+y+"' font-size='"+z+"' font-family='ui-monospace,Menlo,Consolas,monospace' font-weight='"+(wt||400)+"' style='fill:"+f+"'>"+txt+"</text>"}
+  function TM(){return F(16,6,188,84,8,"#0a0a0a")+"<circle cx='28' cy='16' r='3' style='fill:#ef4444'/><circle cx='38' cy='16' r='3' style='fill:#f59e0b'/><circle cx='48' cy='16' r='3' style='fill:#ff7a1a'/>"}
+  if(i==0)b=F(14,6,90,28,7,"var(--tint)","var(--ac)")+F(116,6,90,28,7,"var(--card)","var(--bd)")+F(14,40,90,28,7,"var(--card)","var(--bd)")+F(116,40,90,28,7,"var(--tint)","var(--ac)")+F(22,13,14,14,4,"var(--ac)")+F(124,13,14,14,4,"var(--mut)")+F(22,47,14,14,4,"var(--mut)")+F(124,47,14,14,4,"var(--ac)")+F(44,17,44,5,2,"var(--mut)")+F(146,17,44,5,2,"var(--mut)")+F(44,51,44,5,2,"var(--mut)")+F(146,51,44,5,2,"var(--mut)")+F(60,74,100,18,9,"var(--ac)")+F(80,80,60,6,3,"var(--card)");
+  if(i==1)b=F(46,26,128,38,10,"var(--ac)")+"<rect x='62' y='36' width='13' height='16' rx='3' style='fill:none;stroke:#fff;stroke-width:2'/><rect x='67' y='40' width='13' height='16' rx='3' style='fill:var(--ac);stroke:#fff;stroke-width:2'/>"+F(90,43,64,6,3,"#fff")+"<circle cx='150' cy='58' r='12' style='fill:none;stroke:var(--ac);opacity:.5'/><path d='M150 52v26l7-7 5 12 5-2-5-12h9z' style='fill:#fff;stroke:#111;stroke-width:1.5'/>";
+  if(i==2)b=F(24,10,172,28,14,"var(--card)","var(--bd)")+"<circle cx='40' cy='24' r='5' style='fill:none;stroke:var(--mut);stroke-width:2'/><path d='M44 28l5 5' style='stroke:var(--mut);stroke-width:2'/>"+X(56,28,11,"var(--tx)",sh)+F(24,46,172,38,10,"var(--tint)")+F(34,53,24,24,6,w?"#1e40af":"#111")+X(38,70,12,"#fff","&gt;_",700)+X(66,62,11,"var(--tx)",sh,600)+X(66,76,9,"var(--mut)",w?"App":"Utilities")+F(150,55,40,20,6,"var(--card)","var(--bd)")+X(157,69,9,"var(--tx)","Enter",700);
+  if(i==3)b=TM()+X(26,42,9,"#ffb27a",w?"PS&gt;":"~ $")+X(w?54:50,42,9,"#e6ebf5",w?"winget install -e --id …":"brew install --cask …")+F(112,58,84,24,7,"var(--ac)")+X(124,74,11,"var(--acx)",w?"Ctrl + V":"Cmd + V",700);
+  if(i==4)b=TM()+X(26,34,9,"#e6ebf5","[1/3] Chrome")+X(26,48,9,"#e6ebf5","[2/3] Git")+X(26,62,9,"#94a3b8","[3/3] VS Code …")+F(26,72,120,6,3,"#334155")+F(26,72,84,6,3,"#ff7a1a")+"<circle cx='176' cy='68' r='10' style='fill:#ff7a1a'/><path d='M171 68l4 4 7-8' style='fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round'/>"+F(150,22,44,18,6,"var(--ac)")+X(158,35,9,"var(--acx)","Enter",700);
+  return"<svg class='gi' viewBox='0 0 220 96' role='img'>"+b+"</svg>";
+}
+
+function guide(){
+  var w=os=="win",L=[t("s0"),t("s1"),t(w?"s2w":"s2m"),t("s3",{k:w?"Ctrl + V":"Cmd + V"}),t(w?"s4w":"s4m")],h="";
+  L.forEach(function(x,i){h+="<div class='gs'><span class='gn'>"+(i+1)+"</span><div class='gb2'><p>"+x+"</p>"+ill(i)+"</div></div>"});
+  $("gsteps").innerHTML=h;
+}
+
+function dlf(name,text,type){
+  var b=new Blob([text],{type:type||"text/plain;charset=utf-8"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(b);
+  a.download=name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function(){URL.revokeObjectURL(a.href)},1500);
+}
+
+function bn(n){return String(n).replace(/[&|<>^%!"()]/g," ")}
+
+function script(){
+  var L=[],w=os=="win",s;
+  A.forEach(function(a){if(sel[a.n]&&id(a))L.push({n:a.n,id:id(a),f:a.f})});
+  custom.forEach(function(c){L.push({n:c,id:c,f:false})});
+  if(mode=="u" && ua){
+    return w?"@echo off\r\nchcp 65001 >nul\r\nwinget upgrade --all --include-unknown --accept-package-agreements --accept-source-agreements\r\necho.\r\necho Done.\r\npause\r\n":"#!/bin/bash\nbrew update\nbrew upgrade\nbrew upgrade --cask --greedy\necho Done.\n";
+  }
+  if(!L.length)return(w?"REM ":"# ")+t("pick")+"\n";
+  var v=mode=="i"?"install":mode=="u"?"upgrade":"uninstall";
+  var actTxt=mode=="i"?"Installing ":mode=="u"?"Updating ":"Removing ";
+  if(w){
+    var okc2=(mode=="i"||mode=="u")?"-1978335189":"-1978335212";
+    s="@echo off\r\nsetlocal enabledelayedexpansion\r\nchcp 65001 >nul\r\nwhere winget >nul 2>&1 || (echo winget not found. Update App Installer from Microsoft Store. & pause & exit /b 1)\r\nset OK=0\r\nset BAD=0\r\nset FL=\r\necho "+actTxt+L.length+" apps...\r\n";
+    L.forEach(function(x,i){
+      var n=bn(x.n);
+      s+="echo.\r\necho ["+(i+1)+"/"+L.length+"] "+n+"\r\nwinget "+v+" -e --id "+x.id+((mode=="i"||mode=="u")?" --accept-package-agreements --accept-source-agreements":"")+"\r\nset RC=!errorlevel!\r\nif !RC! equ 0 (set /a OK+=1) else if !RC! equ "+okc2+" (set /a OK+=1) else (set /a BAD+=1 & set \"FL=!FL! "+n+";\")\r\n";
+    });
+    return s+"echo.\r\necho ===== Summary: !OK! succeeded, !BAD! failed =====\r\nif !BAD! gtr 0 echo Failed: !FL!\r\npause\r\n";
+  }
+  var c=L.filter(function(x){return!x.f}).map(function(x){return x.id}),f=L.filter(function(x){return x.f}).map(function(x){return x.id}),b="brew "+v;
+  function lp(list,fl){return"for p in "+list.join(" ")+"; do\n  if "+b+fl+" \"$p\"; then OK=$((OK+1)); else BAD=$((BAD+1)); FAILED=\"$FAILED $p\"; fi\ndone\n"}
+  s="#!/bin/bash\n"+(mode=="i"?"command -v brew >/dev/null || /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"\n":mode=="u"?"brew update\n":"")+"OK=0; BAD=0; FAILED=\"\"\n";
+  if(c.length)s+=lp(c," --cask");
+  if(f.length)s+=lp(f,"");
+  return s+"echo\necho \"===== Summary: $OK succeeded, $BAD failed =====\"\nif [ \"$BAD\" -gt 0 ]; then echo \"Failed:$FAILED\"; fi\nexit $(( BAD > 0 ? 1 : 0 ))\n";
+}
+
+function fname(){return({i:"onetap-install",r:"onetap-uninstall",u:"onetap-update-selected"})[mode]+(os=="win"?".bat":".sh")}
+
+function psCmd(){
+  if(mode=="u" && ua)return"winget upgrade --all --include-unknown --accept-package-agreements --accept-source-agreements";
+  var L=[];A.forEach(function(a){if(sel[a.n]&&a.w)L.push(a.w)});custom.forEach(function(c){L.push(c)});
+  if(!L.length)return"";
+  var v=mode=="i"?"install":mode=="u"?"upgrade":"uninstall";
+  var okc2=(mode=="i"||mode=="u")?"-1978335189":"-1978335212";
+  return"$f=@(); @("+L.map(function(x){return"'"+x+"'"}).join(",")+") | ForEach-Object { winget "+v+" -e --id $_"+((mode=="i"||mode=="u")?" --accept-package-agreements --accept-source-agreements":"")+"; if ($LASTEXITCODE -notin 0,"+okc2+") { $f += $_ } }; if ($f) { 'Failed: ' + ($f -join ', ') } else { 'Done.' }";
+}
+
+function dlgui(){
+  $("uopt").style.display=mode=="u"?"block":"none";
+  $("ugr").checked=ua;
+  $("fmt").style.display=os=="win"?"flex":"none";
+  $("fmt").querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b.dataset.f==wfmt)});
+  if(os=="win" && wfmt=="ps"){
+    $("code").value=psCmd()||("# "+t("pick"));
+    $("steps").innerHTML=t("stp");
+  } else {
+    $("code").value=script();
+    $("steps").innerHTML=t(os=="win"?"stw":"stm",{f:fname()});
+  }
+  $("secnote").textContent=os=="win"?t("sec"):"";
+  $("secnote").style.display=os=="win"?"block":"none";
+  $("dm").querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b.dataset.m==mode)});
+}
+
+function openDlg(m){mode=m;$("msg").textContent="";dlgui();$("dlg").showModal()}
+
+/* معالجة الضغط الذكية بدون إعادة رسم الصفحة بالكامل */
+$("list").onclick=function(e){
+  var tog=e.target.closest("[data-cat-tog]");
+  if(tog){
+    var cName=tog.dataset.catTog;
+    var catApps=A.filter(function(x){return x.c==cName && id(x)});
+    var allSel=catApps.every(function(x){return sel[x.n]});
+    catApps.forEach(function(x){sel[x.n]=!allSel});
+    if(cat=="sel"){render();return;}
+    document.querySelectorAll("#list .card[data-n]").forEach(function(c){
+      var appName=c.dataset.n;
+      if(catApps.some(function(x){return x.n==appName})){
+        c.classList.toggle("on",!!sel[appName]);
+      }
+    });
+    syncState();
+    return;
+  }
+  var b=e.target.closest("button");
+  if(!b)return;
+  if(b.dataset.n){
+    var name=b.dataset.n;
+    sel[name]=!sel[name];
+    if(cat=="sel"){
+      render();
+    }else{
+      b.classList.toggle("on",!!sel[name]);
+      syncState();
+    }
+  } else if(b.dataset.x){
+    custom.splice(+b.dataset.x,1);
+    render();
+  }
+};
+
+$("chips").onclick=function(e){var b=e.target.closest("button");if(b){cat=b.dataset.c;render()}};
+
+var qTimer;
+$("q").oninput=function(){
+  var val=this.value.trim();
+  $("qclr").classList.toggle("show",val.length>0);
+  clearTimeout(qTimer);
+  qTimer=setTimeout(function(){
+    q=val;
+    render();
+  },120);
+};
+$("qclr").onclick=function(){
+  $("q").value="";
+  q="";
+  this.classList.remove("show");
+  render();
+  $("q").focus();
+};
+
+addEventListener("keydown",function(e){
+  if(e.key==="/" && document.activeElement.tagName!=="INPUT" && document.activeElement.tagName!=="TEXTAREA"){
+    e.preventDefault();
+    $("q").focus();
+  }
+});
+
+$("packs").onclick=function(e){
+  var b=e.target.closest("button");
+  if(!b)return;
+  var items=PACKS[b.dataset.k].filter(function(n){
+    var found=A.find(function(a){return a.n==n});
+    return found && id(found);
+  });
+  var allOn=items.every(function(n){return sel[n]});
+  items.forEach(function(n){sel[n]=!allOn});
+  if(cat=="sel"){
+    render();
+  }else{
+    document.querySelectorAll("#list .card[data-n]").forEach(function(c){
+      c.classList.toggle("on",!!sel[c.dataset.n]);
+    });
+    syncState();
+  }
+};
+
+$("none").onclick=function(){sel={};custom=[];cat="all";render()};
+$("addc").onclick=function(){var v=$("cust").value.trim();if(v&&okc(v)&&custom.indexOf(v)<0){custom.push(v);$("cust").value="";render()}};
+$("cust").onkeydown=function(e){if(e.key==="Enter")$("addc").click()};
+$("t-win").onclick=function(){os="win";osui();render();dlgui()};
+$("t-mac").onclick=function(){os="mac";osui();render();dlgui()};
+
+var LN=[["ar","العربية"],["en","English"],["tr","Türkçe"],["fr","Français"],["es","Español"]];
+function lui(){
+  $("lc").textContent=lang.toUpperCase();
+  $("llist").innerHTML=LN.map(function(x){
+    return"<button class='lo"+(x[0]==lang?" on":"")+"' data-l='"+x[0]+"'><span>"+x[1]+"</span><small>"+x[0].toUpperCase()+"</small></button>";
+  }).join("");
+}
+$("lang").onclick=function(){lui();$("ldlg").showModal()};
+$("llist").onclick=function(e){var b=e.target.closest("button");if(b){lang=b.dataset.l;$("ldlg").close();ui()}};
+
+["dlg","ldlg","gdlg","idlg"].forEach(function(i){
+  $(i).addEventListener("click",function(e){
+    var r=this.getBoundingClientRect();
+    if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)this.close();
+  });
+});
+
+$("go").onclick=function(){if(!count()){say("pick");return}openDlg("i")};
+$("bupd").onclick=function(){if(!count()){say("pick");return}openDlg("u")};
+$("dm").onclick=function(e){var b=e.target.closest("button");if(b){mode=b.dataset.m;$("msg").textContent="";dlgui()}};
+$("fmt").onclick=function(e){var b=e.target.closest("button");if(b){wfmt=b.dataset.f;$("msg").textContent="";dlgui()}};
+$("close").onclick=function(){$("dlg").close()};
+$("ugr").onchange=function(){ua=this.checked;dlgui()};
+$("ps").onclick=function(){if(!(mode=="u"&&ua)&&!count()){say("pick");return}cpy($("code").value,"cpd")};
+$("dlb").onclick=function(){if(!(mode=="u"&&ua)&&!count()){say("pick");return}dlf(fname(),script());say("dld")};
+$("code").onclick=function(){this.select()};
+$("gopen").onclick=$("gb").onclick=function(){guide();$("gdlg").showModal()};
+$("gclose").onclick=function(){$("gdlg").close()};
+$("iclose").onclick=function(){$("idlg").close()};
+
+$("bshare").onclick=function(){
+  if(!count()){say("pick");return}
+  var s=snap();
+  cpy(location.href.split("#")[0]+"#o="+os+"&s="+s.s.map(encodeURIComponent).join("~")+(s.c.length?"&c="+s.c.map(encodeURIComponent).join("~"):""),"lk");
+};
+$("bexp").onclick=function(){dlf("onetap-list.json",JSON.stringify(snap(),null,2),"application/json");say("exd")};
+$("bimp").onclick=function(){$("imf").click()};
+$("imf").onchange=function(){
+  var f=this.files[0],inp=this;if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var o=JSON.parse(r.result);
+      if(!o||typeof o!="object"||!Array.isArray(o.s))throw 0;
+      ld(o);ui();say("imd");
+    }catch(e){say("imx")}
+    inp.value="";
+  };
+  r.readAsText(f);
+};
+
+$("theme").onclick=function(){
+  var r=document.documentElement,d=r.dataset.theme!="light";
+  r.dataset.theme=d?"light":"dark";
+  try{localStorage.setItem("th",r.dataset.theme)}catch(e){}
+};
+
+function hh(){document.body.style.paddingTop=(document.querySelector(".top").offsetHeight+12)+"px"}
+addEventListener("resize",hh);
+addEventListener("load",hh);
+
+/* ===== نظام التثبيت الشامل (كمبيوتر + أندرويد + آيفون) ===== */
+addEventListener("beforeinstallprompt",function(e){
+  e.preventDefault();
+  dp=e;
+});
+
+function downloadDesktopShortcut(){
+  var url = location.href.split("#")[0];
+  var isMac = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+  if(isMac){
+    var plist = '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">\n<dict>\n\t<key>URL</key>\n\t<string>'+url+'</string>\n</dict>\n</plist>';
+    dlf("OneTap.webloc", plist, "application/xml");
+  } else {
+    var content = "[InternetShortcut]\r\nURL=" + url + "\r\nIconIndex=0\r\n";
+    dlf("OneTap.url", content, "application/internet-shortcut");
+  }
+  say("dld");
+}
+
+function handleInstallClick(){
+  /* 1. إذا كان المتصفح يدعم التثبيت المباشر (أندرويد كروم / ويندوز كروم أو إيدج) */
+  if(dp){
+    dp.prompt();
+    dp.userChoice.then(function(){ dp=null; });
+    return;
+  }
+
+  var uaStr = navigator.userAgent || "";
+  var isIOS = /iPad|iPhone|iPod/.test(uaStr) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var isAndroid = /Android/i.test(uaStr);
+  var ar = lang === "ar";
+  var html = "";
+
+  if(isIOS){
+    html = "<div class='inst-box'>" +
+      "<h4>📱 " + (ar ? "تثبيت التطبيق على آيفون / آيباد" : "Install on iPhone / iPad") + "</h4>" +
+      "<ol>" +
+      "<li>" + (ar ? "اضغط على زر <b>المشاركة (Share)</b> ⬆️ في شريط متصفح Safari بالأسفل." : "Tap the <b>Share</b> button ⬆️ at the bottom of Safari.") + "</li>" +
+      "<li>" + (ar ? "مرّر للأسفل واختر <b>«إضافة إلى الشاشة الرئيسية» (Add to Home Screen)</b> ➕." : "Scroll down and tap <b>Add to Home Screen</b> ➕.") + "</li>" +
+      "<li>" + (ar ? "اضغط <b>إضافة (Add)</b> ليظهر تطبيق OneTap على شاشتك الرئيسية." : "Tap <b>Add</b> to place OneTap on your home screen.") + "</li>" +
+      "</ol></div>";
+  } else if(isAndroid){
+    html = "<div class='inst-box'>" +
+      "<h4>🤖 " + (ar ? "تثبيت التطبيق على الشاشة الرئيسية (أندرويد)" : "Install on Android Home Screen") + "</h4>" +
+      "<ol>" +
+      "<li>" + (ar ? "افتح قائمة المتصفح بالضغط على النقاط الثلاث <b>(⋮)</b> أعلى الشاشة." : "Tap the browser menu <b>(⋮)</b> at the top corner.") + "</li>" +
+      "<li>" + (ar ? "اختر <b>«تثبيت التطبيق» (Install app)</b> أو <b>«الإضافة إلى الشاشة الرئيسية»</b>." : "Select <b>Install app</b> or <b>Add to Home screen</b>.") + "</li>" +
+      "</ol></div>";
+  } else {
+    html = "<div class='inst-box'>" +
+      "<h4>💻 " + (ar ? "الخيار 1: تنزيل اختصار مباشر لسطح المكتب" : "Option 1: Download Desktop Shortcut") + "</h4>" +
+      "<p>" + (ar ? "احفظ ملف اختصار يفتح موقع OneTap مباشرة من سطح المكتب بنقرتين:" : "Download a shortcut file to open OneTap directly from your desktop:") + "</p>" +
+      "<button type='button' class='btn pri' id='dl-short' style='width:100%'>" + (ar ? "تنزيل اختصار سطح المكتب (OneTap)" : "Download Desktop Shortcut") + "</button>" +
+      "</div>" +
+      "<div class='inst-box'>" +
+      "<h4>🚀 " + (ar ? "الخيار 2: تثبيت كتطبيق مستقل (Chrome / Edge)" : "Option 2: Install as Desktop App") + "</h4>" +
+      "<p>" + (ar ? "من شريط العنوان في المتصفح بالأعلى، اضغط على أيقونة التثبيت <b>(⊕ أو شاشة بداخلها سهم)</b> ثم اختر <b>تثبيت</b>." : "Click the install icon in your browser's address bar and select <b>Install</b>.") + "</p>" +
+      "</div>";
+  }
+
+  $("ibody").innerHTML = html;
+  var dlBtn = $("dl-short");
+  if(dlBtn) dlBtn.onclick = function(){ downloadDesktopShortcut(); $("idlg").close(); };
+  $("idlg").showModal();
+}
+
+$("binst").onclick = handleInstallClick;
+$("top-inst").onclick = handleInstallClick;
+
+if("serviceWorker" in navigator&&/^https?:/.test(location.protocol))navigator.serviceWorker.register("sw.js").catch(function(){});
+try{var th=localStorage.getItem("th");if(th)document.documentElement.dataset.theme=th}catch(e){}
+try{var sv=JSON.parse(localStorage.getItem("ot")||"null");if(sv)ld(sv)}catch(e){}
+try{
+  var hs=location.hash.slice(1);
+  if(hs){
+    var m={};
+    hs.split("&").forEach(function(x){var p=x.split("=");m[p[0]]=p[1]||""});
+    ld({os:m.o,s:m.s?m.s.split("~").map(decodeURIComponent):[],c:m.c?m.c.split("~").map(decodeURIComponent):[]});
+  }
+}catch(e){}
+ui();
+</script>
+</body>
+</html>

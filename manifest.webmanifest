@@ -1,0 +1,20 @@
+{
+  "name": "OneTap | مثبّت التطبيقات بملف واحد",
+  "short_name": "OneTap",
+  "description": "اختر تطبيقاتك ونزّل سكربتًا واحدًا يثبّتها كلها تلقائيًا على ويندوز وماك من المصادر الرسمية.",
+  "start_url": "./onetap.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070709",
+  "theme_color": "#ff7a1a",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='115' fill='%230a0a0a'/><path d='M138 164H374M256 164V358' stroke='%23ff7a1a' stroke-width='56' stroke-linecap='round' fill='none'/><ellipse cx='256' cy='410' rx='118' ry='28' fill='none' stroke='%23ff7a1a' stroke-width='20' opacity='.6'/></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
