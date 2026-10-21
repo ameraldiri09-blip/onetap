@@ -1779,15 +1779,21 @@ addEventListener("beforeinstallprompt",function(e){
 });
 
 function downloadDesktopShortcut(){
-  var url = location.href.split("#")[0];
-  var isMac = /Mac|iPod|iPhone|iPad/.test(navigator.platform);
-  if(isMac){
-    var plist = '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">\n<dict>\n\t<key>URL</key>\n\t<string>'+url+'</string>\n</dict>\n</plist>';
-    dlf("OneTap.webloc", plist, "application/xml");
-  } else {
-    var content = "[InternetShortcut]\r\nURL=" + url + "\r\nIconIndex=0\r\n";
-    dlf("OneTap.url", content, "application/internet-shortcut");
-  }
+  var siteUrl = window.location.href.split("#")[0];
+  
+  var batCode = '@echo off\r\n' +
+    'chcp 65001 >nul\r\n' +
+    'set VBS="%TEMP%\\mk_onetap_%RANDOM%.vbs"\r\n' +
+    'echo Set oWS = WScript.CreateObject("WScript.Shell") >> %VBS%\r\n' +
+    'echo sDesktop = oWS.SpecialFolders("Desktop") >> %VBS%\r\n' +
+    'echo Set oLink = oWS.CreateShortcut(sDesktop ^& "\\OneTap.url") >> %VBS%\r\n' +
+    'echo oLink.TargetPath = "' + siteUrl + '" >> %VBS%\r\n' +
+    'echo oLink.Save >> %VBS%\r\n' +
+    'cscript //nologo %VBS% >nul 2>&1\r\n' +
+    'del %VBS% >nul 2>&1\r\n' +
+    'exit /b\r\n';
+
+  dlf("تثبيت-اختصار-OneTap.bat", batCode, "text/plain;charset=utf-8");
   say("dld");
 }
 
