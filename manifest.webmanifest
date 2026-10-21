@@ -2,7 +2,7 @@
   "name": "OneTap | مثبّت التطبيقات بملف واحد",
   "short_name": "OneTap",
   "description": "اختر تطبيقاتك ونزّل سكربتًا واحدًا يثبّتها كلها تلقائيًا على ويندوز وماك من المصادر الرسمية.",
-  "start_url": "./onetap.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#070709",
