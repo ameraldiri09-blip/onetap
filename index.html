@@ -1780,20 +1780,14 @@ addEventListener("beforeinstallprompt",function(e){
 
 function downloadDesktopShortcut(){
   var siteUrl = window.location.href.split("#")[0];
-  
-  var batCode = '@echo off\r\n' +
-    'chcp 65001 >nul\r\n' +
-    'set VBS="%TEMP%\\mk_onetap_%RANDOM%.vbs"\r\n' +
-    'echo Set oWS = WScript.CreateObject("WScript.Shell") >> %VBS%\r\n' +
-    'echo sDesktop = oWS.SpecialFolders("Desktop") >> %VBS%\r\n' +
-    'echo Set oLink = oWS.CreateShortcut(sDesktop ^& "\\OneTap.url") >> %VBS%\r\n' +
-    'echo oLink.TargetPath = "' + siteUrl + '" >> %VBS%\r\n' +
-    'echo oLink.Save >> %VBS%\r\n' +
-    'cscript //nologo %VBS% >nul 2>&1\r\n' +
-    'del %VBS% >nul 2>&1\r\n' +
-    'exit /b\r\n';
+  var fileData = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+    '<meta http-equiv="refresh" content="0;url=' + siteUrl + '">' +
+    '<title>OneTap Launcher</title>' +
+    '</head><body>' +
+    '<script>location.replace("' + siteUrl + '");<\/script>' +
+    '</body></html>';
 
-  dlf("تثبيت-اختصار-OneTap.bat", batCode, "text/plain;charset=utf-8");
+  dlf("OneTap-Shortcut.html", fileData, "text/html;charset=utf-8");
   say("dld");
 }
 
